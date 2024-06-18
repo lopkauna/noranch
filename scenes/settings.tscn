@@ -1,0 +1,345 @@
+[gd_scene load_steps=5 format=3 uid="uid://clae42bgn2ptb"]
+
+[ext_resource type="Script" path="res://scripts/settings.gd" id="1_qh4ox"]
+[ext_resource type="Script" path="res://scripts/buttonremmaper.gd" id="2_ctgt5"]
+[ext_resource type="Shader" path="res://shaders/settingsbackgroundshader.gdshader" id="3_ddqrv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_le0qf"]
+shader = ExtResource("3_ddqrv")
+shader_parameter/color_gap = Color(0.25, 0.25, 0.25, 0.25)
+shader_parameter/color_stripe = Color(1, 0.75, 0, 1)
+shader_parameter/divisions = 8.0
+shader_parameter/stripe_bias = 2.5
+shader_parameter/speed = 0.1
+shader_parameter/angle = 0.7854
+
+[node name="Settings" type="Node2D"]
+script = ExtResource("1_qh4ox")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Main Menu" type="Button" parent="CanvasLayer/Control/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="TabControl" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tabs_visible = false
+use_hidden_tabs_for_min_size = true
+
+[node name="MainMenu" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+layout_mode = 2
+text = "Main Menu Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoToInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+layout_mode = 2
+text = "Interface"
+
+[node name="GoToBinding" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+layout_mode = 2
+text = "Binds"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GoToCredits" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Credits"
+
+[node name="Interface" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+layout_mode = 2
+text = "Interface Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+layout_mode = 2
+text = "Go Back"
+
+[node name="AnimatedBackground" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Use Animated Background  "
+
+[node name="UseGridForNotes" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Use Grid"
+
+[node name="UseBuildInFileSystem" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Use Build In File System"
+
+[node name="ResetInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+layout_mode = 2
+text = "Reset Interface"
+
+[node name="Binds" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+text = "Binding Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+text = "Go Back"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="MoveNotesLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Notes"
+
+[node name="MoveNotesButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "movenotes"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="ZoomInLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zoom In"
+
+[node name="ZoomInButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "zoomin"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="ZoomOutLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zoom Out"
+
+[node name="ZoomOutButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "zoomout"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="ZoomDefLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Default Zoom"
+
+[node name="ZoomDefButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "defzoom"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="UpLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Up"
+
+[node name="UpButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "up"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="DownLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Down"
+
+[node name="DownButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer6"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "down"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="LeftLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Left"
+
+[node name="LeftButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer7"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "left"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="RightLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Right"
+
+[node name="RightButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer8"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "right"
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+layout_mode = 2
+alignment = 2
+
+[node name="FastMoveLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Faster Movement"
+
+[node name="FastMoveButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer9"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_ctgt5")
+action = "fastmv"
+
+[node name="ResetBindsButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Reset all binds"
+
+[node name="Credits" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits"]
+layout_mode = 2
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits"]
+layout_mode = 2
+text = "Go Back"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Main Menu Shader:
+[url]https://godotshaders.com/shader/perspective-grid/[/url]
+
+Notes Background Shader:
+[url]https://godotshaders.com/shader/procedural-electric-background-shader/[/url]
+
+Settings Menu Shader:
+[url]https://godotshaders.com/shader/animated-stripes/[/url]"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ColorRect3" type="ColorRect" parent="ParallaxBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0475577, 0.0475576, 0.0475576, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+visible = false
+material = SubResource("ShaderMaterial_le0qf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="ParallaxBackground"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.533037, 0.533037, 0.533037, 0.615686)
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/HBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/GoToInterface" to="." method="_on_go_to_interface_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/GoToBinding" to="." method="_on_go_to_binding_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/MarginContainer/GoToCredits" to="." method="_on_go_to_credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/AnimatedBackground" to="." method="_on_animated_background_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/UseGridForNotes" to="." method="_on_use_grid_for_notes_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/UseBuildInFileSystem" to="." method="_on_use_build_in_file_system_toggled"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/ResetInterface" to="." method="_on_reset_interface_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/ResetBindsButton" to="." method="_on_reset_binds_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="meta_clicked" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

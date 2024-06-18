@@ -1,0 +1,116 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfl6u5isww8eh"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_nksum"]
+[ext_resource type="Shader" path="res://shaders/main_menu.gdshader" id="2_4r6q5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iqsg8"]
+shader = ExtResource("2_4r6q5")
+
+[node name="main menu" type="Node2D"]
+script = ExtResource("1_nksum")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -136.5
+offset_right = 96.0
+offset_bottom = 136.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "Noranch"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Go Nots" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "New Note Tree"
+
+[node name="Settings" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+
+[node name="Rescent note trees" type="VBoxContainer" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RescentNotesButton" type="Button" parent="CanvasLayer/Control/Rescent note trees"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+text = "Rescent Note Trees"
+
+[node name="Note Trees Buttons" type="VBoxContainer" parent="CanvasLayer/Control/Rescent note trees"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ColorRect3" type="ColorRect" parent="ParallaxBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ParallaxBackground"]
+visible = false
+material = SubResource("ShaderMaterial_iqsg8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.588235)
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Go Nots" to="." method="_on_go_nots_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="toggled" from="CanvasLayer/Control/Rescent note trees/RescentNotesButton" to="." method="_on_rescent_notes_button_toggled"]

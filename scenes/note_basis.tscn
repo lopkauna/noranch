@@ -1,0 +1,240 @@
+[gd_scene load_steps=7 format=3 uid="uid://0nqsdkp8jge"]
+
+[ext_resource type="Script" path="res://scripts/note_basis.gd" id="1_4o4ao"]
+[ext_resource type="Shader" path="res://shaders/grid_shader.gdshader" id="2_44hi5"]
+[ext_resource type="PackedScene" uid="uid://cs87g63nyskdn" path="res://scenes/notes_table.tscn" id="2_r37ex"]
+[ext_resource type="Shader" path="res://shaders/note_basisbackground.gdshader" id="3_rh4h2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uon28"]
+shader = ExtResource("3_rh4h2")
+shader_parameter/cmpos = Vector2(0, 0)
+shader_parameter/multplr = 1.0
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/line_color = Color(0.172549, 0.101961, 0.188235, 1)
+shader_parameter/line_freq = 2.4
+shader_parameter/height = 0.6
+shader_parameter/speed = 0.8
+shader_parameter/scale = Vector2(10, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8r70"]
+shader = ExtResource("2_44hi5")
+shader_parameter/srensize = Vector2(0, 0)
+shader_parameter/cmpos = Vector2(0, 0)
+shader_parameter/multplr = 1.0
+shader_parameter/gridsize = 16.0
+shader_parameter/transperancy = 0.14
+
+[node name="NoteBasis" type="Node2D"]
+script = ExtResource("1_4o4ao")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 192.0
+offset_bottom = 42.0
+theme_override_constants/separation = 2
+
+[node name="Main Menu" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Load" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "Load"
+
+[node name="Save" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="Clear" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -61.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Search" type="Button" parent="CanvasLayer/Control/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+toggle_mode = true
+text = "Search"
+
+[node name="TagFinderPanel" type="Panel" parent="CanvasLayer/Control/HBoxContainer2"]
+visible = false
+custom_minimum_size = Vector2(240, 126)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="MarginContainer" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel"]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 240.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="VBoxContainer" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel"]
+layout_mode = 2
+text = "Tag Finder"
+horizontal_alignment = 1
+
+[node name="TagSearchLineEdit" type="LineEdit" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel"]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Enter Tag here!"
+
+[node name="MatchCount" type="Label" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel"]
+layout_mode = 2
+text = "Matches Found: 0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Prev" type="Button" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Prev"
+
+[node name="Next" type="Button" parent="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Next"
+
+[node name="LoadDialog" type="FileDialog" parent="CanvasLayer"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(600, 400)
+popup_window = true
+min_size = Vector2i(600, 400)
+ok_button_text = "Открыть"
+dialog_hide_on_ok = true
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.notdat")
+
+[node name="SaveDialog" type="FileDialog" parent="CanvasLayer"]
+title = "Save"
+initial_position = 2
+size = Vector2i(600, 400)
+popup_window = true
+min_size = Vector2i(600, 400)
+ok_button_text = "Сохранить"
+access = 2
+filters = PackedStringArray("*.notdat")
+
+[node name="Greetings" type="Label" parent="."]
+visible = false
+self_modulate = Color(0.521569, 0.521569, 0.521569, 0.556863)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -24.5
+offset_right = 186.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Create your first note with [Right Mouse Button]
+or just Drag and Drop file here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Notes Table" parent="." instance=ExtResource("2_r37ex")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ColorRect3" type="ColorRect" parent="ParallaxBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0631356, 0.0698427, 0.110447, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ParallaxBackground"]
+visible = false
+material = SubResource("ShaderMaterial_uon28")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.219501, 0.219501, 0.219501, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+visible = false
+material = SubResource("ShaderMaterial_g8r70")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.344076, 0.344076, 0.344076, 1)
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+size = Vector2i(119, 89)
+item_count = 3
+item_0/text = "Add Note"
+item_0/id = 0
+item_1/text = "Center Cam"
+item_1/id = 1
+item_2/text = "Reset Zoom"
+item_2/id = 2
+
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="toggled" from="CanvasLayer/Control/HBoxContainer2/Search" to="." method="_on_search_toggled"]
+[connection signal="focus_entered" from="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel/TagSearchLineEdit" to="." method="_on_tag_search_line_edit_focus_entered"]
+[connection signal="focus_exited" from="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel/TagSearchLineEdit" to="." method="_on_tag_search_line_edit_focus_exited"]
+[connection signal="text_changed" from="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel/TagSearchLineEdit" to="." method="_on_tag_search_line_edit_text_changed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/HBoxContainer/Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/HBoxContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="canceled" from="CanvasLayer/LoadDialog" to="." method="_on_load_dialog_canceled"]
+[connection signal="confirmed" from="CanvasLayer/LoadDialog" to="." method="_on_load_dialog_confirmed"]
+[connection signal="file_selected" from="CanvasLayer/LoadDialog" to="." method="_on_load_dialog_file_selected"]
+[connection signal="canceled" from="CanvasLayer/SaveDialog" to="." method="_on_save_dialog_canceled"]
+[connection signal="confirmed" from="CanvasLayer/SaveDialog" to="." method="_on_save_dialog_confirmed"]
+[connection signal="file_selected" from="CanvasLayer/SaveDialog" to="." method="_on_save_dialog_file_selected"]
+[connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]
