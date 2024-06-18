@@ -3,6 +3,7 @@ Hi this is little helpy program i use my self. Writen on Godot v 4.2.
 This editor can help you organize your work or mind flow.
 
 Useful functions (good to know):
+ - Use mouse wheel double click for fast note deletion
  - You can change default binds for programm in options menu.
  - You can add tags to your notes with right mouse click.
  - Noranch support Drag and Drop images in programm window. This will create new note.
