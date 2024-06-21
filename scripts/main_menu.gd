@@ -12,8 +12,10 @@ var interface_preference : Dictionary
 @onready var continue_button = $CanvasLayer/Control/VBoxContainer/Continue
 @onready var note_trees_buttons = $"CanvasLayer/Control/Rescent note trees/Note Trees Buttons"
 @onready var rescent_note_trees = $"CanvasLayer/Control/Rescent note trees"
+@onready var message = $CanvasLayer/Control/Message
 
-
+var desired_alpha = 0
+var alpha_timer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,10 +32,12 @@ func _ready():
 			keymaps[action] = InputMap.action_get_events(action)[0]
 	load_keymaps()
 	load_interface()
-	
+	get_tree().get_root().files_dropped.connect(on_files_drop)
 
 func pack_last_saved_sessions():
 	check_last_saved_sessions()
+	for chlds in note_trees_buttons.get_children():
+		chlds.queue_free()
 	if lastsessionsarray.size() > 0:
 		for i in lastsessionsarray.size():
 			if i >= lastsessionsarray.size()-4 and i < lastsessionsarray.size():
@@ -50,7 +54,19 @@ func pack_last_saved_sessions():
 				nbut.alignment = HORIZONTAL_ALIGNMENT_LEFT
 				nbut.connect("pressed",Callable(self,"ld_prev_note").bind(lastsessionsarray[i]))
 				nbut.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	
+
+func on_files_drop(files):
+	var path : String = files[0]
+	match path.get_extension():
+		"notdat":
+			if FileAccess.file_exists(path):
+				var file = FileAccess.open(path,FileAccess.READ)
+				var temp_session_arr = file.get_var(true) as Array
+				if temp_session_arr.size()>0:
+					Gset.temp_dic = temp_session_arr
+				get_tree().change_scene_to_file("res://scenes/note_basis.tscn")
+			else:
+				alpha_timer = 2
 
 func del_prev_note_in_history(lstpath):
 	lastsessionsarray.erase(lstpath)
@@ -67,7 +83,10 @@ func ld_prev_note(lstpath):
 		var temp_session_arr = file.get_var(true) as Array
 		if temp_session_arr.size()>0:
 			Gset.temp_dic = temp_session_arr
-	get_tree().change_scene_to_file("res://scenes/note_basis.tscn")
+		get_tree().change_scene_to_file("res://scenes/note_basis.tscn")
+	else:
+		del_prev_note_in_history(lstpath)
+		alpha_timer = 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -77,6 +96,12 @@ func _process(delta):
 		rescent_note_trees.visible = false
 	color_rect_2.visible = Gset.AnimatedBG
 	color_rect.visible = Gset.AnimatedBG
+	alpha_timer = move_toward(alpha_timer,0,delta)
+	if alpha_timer>0:
+		desired_alpha = move_toward(desired_alpha,1,delta*4)
+	else:
+		desired_alpha = move_toward(desired_alpha,0,delta)
+	message.modulate.a = clampf(desired_alpha,0,1)
 
 func check_last_unsaved_session():
 	if FileAccess.file_exists(last_unsaved_session_path):

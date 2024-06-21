@@ -18,7 +18,7 @@ theme_override_constants/margin_bottom = 4
 [node name="PopupMenu" type="PopupMenu" parent="body"]
 size = Vector2i(100, 62)
 item_count = 4
-item_0/text = "Delete"
+item_0/text = "Delete Note"
 item_0/id = 0
 item_1/text = "Options"
 item_1/id = 1
@@ -27,23 +27,56 @@ item_2/id = 2
 item_3/text = "Reset Size"
 item_3/id = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="body"]
+[node name="VBoxContainer" type="VBoxContainer" parent="body"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="body/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_right = 57
+
+[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="OptionsTab" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Options"
+
+[node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Move"
+
+[node name="Back" type="Button" parent="body/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="ConnectTo" type="Button" parent="body/HBoxContainer/MarginContainer"]
+[node name="ConnectTo" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "o"
 
-[node name="Line2D" type="Line2D" parent="body/HBoxContainer/MarginContainer/ConnectTo"]
+[node name="Line2D" type="Line2D" parent="body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo"]
 width = 8.0
 default_color = Color(1, 1, 1, 0.564706)
 joint_mode = 2
@@ -53,48 +86,54 @@ round_precision = 32
 antialiased = true
 script = ExtResource("2_a3hhb")
 
-[node name="TabContainer" type="TabContainer" parent="body/HBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="body/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(320, 120)
 layout_mode = 2
 clip_tabs = false
 tabs_visible = false
 all_tabs_in_front = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="body/HBoxContainer/TabContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
+custom_minimum_size = Vector2(240, 96)
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 0
 
-[node name="NoteContent" type="VBoxContainer" parent="body/HBoxContainer/TabContainer/ScrollContainer"]
+[node name="NoteContent" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
+[node name="PanelContainer" type="PanelContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
 layout_mode = 2
 expand_mode = 5
 stretch_mode = 4
 
-[node name="ImageTint" type="ColorRect" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
+[node name="ImageTint" type="ColorRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
 visible = false
 layout_mode = 2
 color = Color(0, 0, 0, 0.588235)
 
-[node name="ImageText" type="Label" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
+[node name="ImageText" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
 visible = false
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Text" type="TextEdit" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
+[node name="Text" type="TextEdit" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
 layout_mode = 2
 size_flags_vertical = 3
 auto_translate = false
@@ -107,7 +146,7 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_move_on_right_click = false
 
-[node name="Label" type="Label" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text"]
+[node name="Label" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text"]
 self_modulate = Color(0.470076, 0.470076, 0.470076, 0.564706)
 layout_mode = 1
 anchors_preset = 15
@@ -120,28 +159,153 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxMenu" type="HBoxContainer" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text"]
+[node name="Settings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
-offset_right = 320.0
-size_flags_vertical = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="OptionsTab" type="Button" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu"]
-visible = false
+[node name="ImageText" type="LineEdit" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-text = "Settings"
+placeholder_text = "Title Text"
 
-[node name="MoveNoteButton" type="Button" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu"]
-visible = false
-clip_contents = true
+[node name="ClearImageText" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer"]
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="ImageTintButton" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Tint"
+
+[node name="FontSizeSmaller" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+text = "-"
+
+[node name="CurrentFontSize" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "  Font Size  "
+horizontal_alignment = 1
+
+[node name="FontSizeBigger" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Label3" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LoadImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load Image"
+
+[node name="RemoveImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove Image"
+
+[node name="fitin" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+text = "Enable Note Scrolling"
+
+[node name="ShowTags" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+text = "Display Tags"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GoTagsSettingsButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Change Tags"
+
+[node name="DefSizeButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset Note Size"
+
+[node name="Delete" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Delete Note"
+
+[node name="TagsSettings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "All Tags"
+
+[node name="TagsProperts" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings"]
+layout_mode = 2
+
+[node name="AddNewTagButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Add New Tag"
+
+[node name="MarginContainer2" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Add Note" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
+text = "+"
+
+[node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Move"
 
-[node name="TagsContainer" type="MarginContainer" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
+[node name="ResizeNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Resize"
+
+[node name="TextBasedMargin" type="MarginContainer" parent="body/VBoxContainer"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 57
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="body/VBoxContainer/TextBasedMargin"]
+layout_mode = 2
+
+[node name="TagsContainer" type="MarginContainer" parent="body/VBoxContainer/TextBasedMargin"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
@@ -149,157 +313,18 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 script = ExtResource("3_5ph0w")
 
-[node name="TagsClick" type="Button" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/TagsContainer"]
+[node name="TagsClick" type="Button" parent="body/VBoxContainer/TextBasedMargin/TagsContainer"]
 visible = false
 layout_mode = 2
 focus_mode = 0
 shortcut_feedback = false
 shortcut_in_tooltip = false
 
-[node name="HFlowContainer" type="FlowContainer" parent="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/TagsContainer"]
+[node name="HFlowContainer" type="FlowContainer" parent="body/VBoxContainer/TextBasedMargin/TagsContainer"]
 layout_mode = 2
 mouse_filter = 2
-
-[node name="Settings" type="VBoxContainer" parent="body/HBoxContainer/TabContainer"]
-visible = false
-custom_minimum_size = Vector2(320, 80)
-layout_mode = 2
-alignment = 1
-
-[node name="Back" type="Button" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-text = "Back"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-
-[node name="ImageText" type="LineEdit" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-placeholder_text = "Title Text"
-
-[node name="ClearImageText" type="Button" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer"]
-custom_minimum_size = Vector2(34, 0)
-layout_mode = 2
-text = "Clear"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 0
-
-[node name="ImageTintButton" type="CheckButton" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Tint"
-
-[node name="FontSizeSmaller" type="Button" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
-custom_minimum_size = Vector2(34, 0)
-layout_mode = 2
-text = "-"
-
-[node name="CurrentFontSize" type="Label" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "  Font Size  "
-horizontal_alignment = 1
-
-[node name="FontSizeBigger" type="Button" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
-custom_minimum_size = Vector2(34, 0)
-layout_mode = 2
-text = "+"
-
-[node name="Label3" type="Label" parent="body/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="LoadImage" type="Button" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-text = "Load Image"
-
-[node name="RemoveImage" type="Button" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-text = "Remove Image"
-
-[node name="Delete" type="Button" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-text = "Delete"
-
-[node name="fitin" type="CheckButton" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-text = "Enable Scrolling"
-
-[node name="DefSizeButton" type="Button" parent="body/HBoxContainer/TabContainer/Settings"]
-layout_mode = 2
-text = "Set Default Size"
-
-[node name="TagsSettings" type="VBoxContainer" parent="body/HBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="body/HBoxContainer/TabContainer/TagsSettings"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "All Tags"
-
-[node name="TagsProperts" type="VBoxContainer" parent="body/HBoxContainer/TabContainer/TagsSettings"]
-layout_mode = 2
-
-[node name="Back" type="Button" parent="body/HBoxContainer/TabContainer/TagsSettings"]
-layout_mode = 2
-text = "Back"
-
-[node name="MarginContainer2" type="MarginContainer" parent="body/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="Add Note" type="Button" parent="body/HBoxContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "+"
-
-[node name="MoveNoteButton" type="Button" parent="body/HBoxContainer/MarginContainer2"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Move"
-
-[node name="ResizeNoteButton" type="Button" parent="body/HBoxContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Resize"
-
-[node name="MarginContainer" type="MarginContainer" parent="body"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/margin_left = 18
-theme_override_constants/margin_right = 57
-
-[node name="HBoxContainer" type="HBoxContainer" parent="body/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="OptionsTab" type="Button" parent="body/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Options"
-
-[node name="MoveNoteButton" type="Button" parent="body/MarginContainer/HBoxContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-text = "Move"
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 
 [node name="LightUp" type="ColorRect" parent="body"]
 self_modulate = Color(1, 1, 1, 0)
@@ -333,35 +358,35 @@ offset_bottom = 51.0
 placeholder_text = "Enter Tag"
 
 [connection signal="index_pressed" from="body/PopupMenu" to="." method="_on_popup_menu_index_pressed"]
-[connection signal="button_down" from="body/HBoxContainer/MarginContainer/ConnectTo" to="." method="_on_connect_to_button_down"]
-[connection signal="tab_changed" from="body/HBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="focus_entered" from="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text" to="." method="_on_text_focus_entered"]
-[connection signal="focus_exited" from="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text" to="." method="_on_text_focus_exited"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu/OptionsTab" to="." method="_on_options_tab_pressed"]
-[connection signal="button_down" from="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu/MoveNoteButton" to="." method="_on_move_note_button_button_down"]
-[connection signal="button_up" from="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu/MoveNoteButton" to="." method="_on_move_note_button_button_up"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/TagsContainer/TagsClick" to="." method="_on_tags_click_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/Back" to="." method="_on_back_pressed"]
-[connection signal="focus_entered" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText" to="." method="_on_text_focus_entered"]
-[connection signal="focus_exited" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText" to="." method="_on_text_focus_exited"]
-[connection signal="text_changed" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText" to="." method="_on_image_text_text_changed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer/ClearImageText" to="." method="_on_clear_image_text_pressed"]
-[connection signal="toggled" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer2/ImageTintButton" to="." method="_on_image_tint_button_toggled"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer2/FontSizeSmaller" to="." method="_on_font_size_smaller_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/HBoxContainer2/FontSizeBigger" to="." method="_on_font_size_bigger_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/LoadImage" to="." method="_on_load_image_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/RemoveImage" to="." method="_on_remove_image_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/Delete" to="." method="_on_delete_pressed"]
-[connection signal="toggled" from="body/HBoxContainer/TabContainer/Settings/fitin" to="." method="_on_fitin_toggled"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/Settings/DefSizeButton" to="." method="_on_def_size_button_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/TabContainer/TagsSettings/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="body/HBoxContainer/MarginContainer2/Add Note" to="." method="_on_add_note_pressed"]
-[connection signal="button_down" from="body/HBoxContainer/MarginContainer2/MoveNoteButton" to="." method="_on_move_note_button_button_down"]
-[connection signal="button_up" from="body/HBoxContainer/MarginContainer2/MoveNoteButton" to="." method="_on_move_note_button_button_up"]
-[connection signal="button_down" from="body/HBoxContainer/MarginContainer2/ResizeNoteButton" to="." method="_on_resize_note_button_button_down"]
-[connection signal="button_up" from="body/HBoxContainer/MarginContainer2/ResizeNoteButton" to="." method="_on_resize_note_button_button_up"]
-[connection signal="button_down" from="body/MarginContainer/HBoxContainer/MoveNoteButton" to="." method="_on_move_note_button_button_down"]
-[connection signal="button_up" from="body/MarginContainer/HBoxContainer/MoveNoteButton" to="." method="_on_move_note_button_button_up"]
+[connection signal="pressed" from="body/VBoxContainer/MarginContainer/HBoxContainer/OptionsTab" to="." method="_on_options_tab_pressed"]
+[connection signal="button_down" from="body/VBoxContainer/MarginContainer/HBoxContainer/MoveNoteButton" to="." method="_on_move_note_button_button_down"]
+[connection signal="button_up" from="body/VBoxContainer/MarginContainer/HBoxContainer/MoveNoteButton" to="." method="_on_move_note_button_button_up"]
+[connection signal="pressed" from="body/VBoxContainer/MarginContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="button_down" from="body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo" to="." method="_on_connect_to_button_down"]
+[connection signal="tab_changed" from="body/VBoxContainer/HBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="focus_entered" from="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text" to="." method="_on_text_focus_entered"]
+[connection signal="focus_exited" from="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text" to="." method="_on_text_focus_exited"]
+[connection signal="focus_entered" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText" to="." method="_on_text_focus_entered"]
+[connection signal="focus_exited" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText" to="." method="_on_text_focus_exited"]
+[connection signal="text_changed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText" to="." method="_on_image_text_text_changed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer/ClearImageText" to="." method="_on_clear_image_text_pressed"]
+[connection signal="toggled" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/ImageTintButton" to="." method="_on_image_tint_button_toggled"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/FontSizeSmaller" to="." method="_on_font_size_smaller_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/FontSizeBigger" to="." method="_on_font_size_bigger_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3/LoadImage" to="." method="_on_load_image_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3/RemoveImage" to="." method="_on_remove_image_pressed"]
+[connection signal="toggled" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/fitin" to="." method="_on_fitin_toggled"]
+[connection signal="toggled" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/ShowTags" to="." method="_on_show_tags_toggled"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4/GoTagsSettingsButton" to="." method="_on_go_tags_settings_button_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4/DefSizeButton" to="." method="_on_def_size_button_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings/AddNewTagButton" to="." method="_on_add_new_tag_button_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/MarginContainer2/Add Note" to="." method="_on_add_note_pressed"]
+[connection signal="button_down" from="body/VBoxContainer/HBoxContainer/MarginContainer2/MoveNoteButton" to="." method="_on_move_note_button_button_down"]
+[connection signal="button_up" from="body/VBoxContainer/HBoxContainer/MarginContainer2/MoveNoteButton" to="." method="_on_move_note_button_button_up"]
+[connection signal="button_down" from="body/VBoxContainer/HBoxContainer/MarginContainer2/ResizeNoteButton" to="." method="_on_resize_note_button_button_down"]
+[connection signal="button_up" from="body/VBoxContainer/HBoxContainer/MarginContainer2/ResizeNoteButton" to="." method="_on_resize_note_button_button_up"]
+[connection signal="pressed" from="body/VBoxContainer/TextBasedMargin/TagsContainer/TagsClick" to="." method="_on_tags_click_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="canceled" from="AddTagDialog" to="." method="_on_add_tag_dialog_canceled"]
 [connection signal="confirmed" from="AddTagDialog" to="." method="_on_add_tag_dialog_confirmed"]

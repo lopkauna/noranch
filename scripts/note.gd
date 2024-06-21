@@ -2,36 +2,44 @@ extends Node2D
 
 @onready var note_basis = $"../.."
 @onready var body = $body
-@onready var tab_container = $body/HBoxContainer/TabContainer
-@onready var fitin = $body/HBoxContainer/TabContainer/Settings/fitin
-@onready var text = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text
-@onready var scroll_container = $body/HBoxContainer/TabContainer/ScrollContainer
+@onready var tab_container = $body/VBoxContainer/HBoxContainer/TabContainer
+@onready var fitin = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/fitin
+@onready var text = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text
+@onready var scroll_container = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer
 @onready var file_dialog = $FileDialog
-@onready var remove_image = $body/HBoxContainer/TabContainer/Settings/RemoveImage
-@onready var texture_rect = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer/TextureRect
-@onready var clear_image_text = $body/HBoxContainer/TabContainer/Settings/HBoxContainer/ClearImageText
-@onready var entr_image_text = $body/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText
-@onready var image_text = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer/ImageText
+@onready var remove_image = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3/RemoveImage
+@onready var texture_rect = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer/TextureRect
+@onready var clear_image_text = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer/ClearImageText
+@onready var entr_image_text = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer/ImageText
+@onready var image_text = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer/ImageText
 
-@onready var options_tab = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu/OptionsTab
-@onready var move_note_button = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/HBoxMenu/MoveNoteButton
-@onready var resize_note_button = $body/HBoxContainer/MarginContainer2/ResizeNoteButton
+@onready var options_tab = $body/VBoxContainer/MarginContainer/HBoxContainer/OptionsTab
+@onready var move_note_button = $body/VBoxContainer/MarginContainer/HBoxContainer/MoveNoteButton
+@onready var back_button = $body/VBoxContainer/MarginContainer/Back
 
-@onready var connect_to = $body/HBoxContainer/MarginContainer/ConnectTo
-@onready var add_note = $"body/HBoxContainer/MarginContainer2/Add Note"
-@onready var line_2d = $body/HBoxContainer/MarginContainer/ConnectTo/Line2D
-@onready var margin_container = $body/HBoxContainer/MarginContainer
-@onready var margin_container_2 = $body/HBoxContainer/MarginContainer2
+@onready var resize_note_button = $body/VBoxContainer/HBoxContainer/MarginContainer2/ResizeNoteButton
+
+
+@onready var connect_to = $body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo
+@onready var add_note = $"body/VBoxContainer/HBoxContainer/MarginContainer2/Add Note"
+@onready var line_2d = $body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo/Line2D
 @onready var popup_menu = $body/PopupMenu
-@onready var current_font_size = $body/HBoxContainer/TabContainer/Settings/HBoxContainer2/CurrentFontSize
-@onready var image_tint = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer/ImageTint
-@onready var image_tint_button = $body/HBoxContainer/TabContainer/Settings/HBoxContainer2/ImageTintButton
-@onready var label = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/Label
+@onready var current_font_size = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/CurrentFontSize
+@onready var image_tint = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer/ImageTint
+@onready var image_tint_button = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/ImageTintButton
+@onready var label = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/Label
 @onready var light_up = $body/LightUp
-@onready var h_flow_container = $body/HBoxContainer/TabContainer/ScrollContainer/NoteContent/TagsContainer/HFlowContainer
+@onready var h_flow_container = $body/VBoxContainer/TextBasedMargin/TagsContainer/HFlowContainer
+@onready var add_new_tag_button = $body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings/AddNewTagButton
 @onready var add_tag_dialog = $AddTagDialog
 @onready var add_tag_dialog_text = $AddTagDialog/TagDialogText
-@onready var tags_properts = $body/HBoxContainer/TabContainer/TagsSettings/TagsProperts
+@onready var tags_properts = $body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings/TagsProperts
+@onready var show_tags = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/ShowTags
+@onready var tags_container = $body/VBoxContainer/TextBasedMargin/TagsContainer
+@onready var tags_settings = $body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings
+@onready var settings_tab = $body/VBoxContainer/HBoxContainer/TabContainer/Settings
+@onready var text_based_margin = $body/VBoxContainer/TextBasedMargin
+
 
 
 var deltreshold = 0
@@ -51,22 +59,25 @@ var oldname = ""
 
 var tags_array : Array = []
 var temp_tags_array : Array = []
+var tagsisvisbl = true
 
 var cursize = Vector2(0,0)
 
 func _ready():
+	#tagsisvisbl = text_based_margin.visible
+	tab_container.self_modulate.a = 0
 	light_up.global_position = tab_container.get_global_rect().position - Vector2(4,4)
 	light_up.size = tab_container.get_global_rect().size + Vector2(8,8)
 	cursize = tab_container.get_global_rect().size
 	image_tint_button.button_pressed = image_tint.visible
-	fitin.button_pressed = scroll_container.vertical_scroll_mode
-
+	
+	
 
 func _process(delta):
+	tags_settings.custom_minimum_size.y = scroll_container.size.y
+	settings_tab.custom_minimum_size.y = scroll_container.size.y
 	if add_tag_dialog.visible == true:
 		note_basis.isnotedialog = true
-		#note_basis.canmov = false
-	#print(tags_array)
 	
 	match tab_container.current_tab:
 		0:
@@ -98,6 +109,7 @@ func _process(delta):
 		label.visible = false
 	current_font_size.text = "Title Size = " + str(image_text.get_theme_font_size("font_size"))
 	if is_connecting_to == true:
+		note_basis.somenotehovered = true
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
 			is_connecting_to = false
 			Gset.curnotehold = null
@@ -130,19 +142,34 @@ func _process(delta):
 		if is_connecting_to == false:
 			connect_to.self_modulate.a = 0
 		add_note.modulate.a = 0
+		resize_note_button.modulate.a = 0
 		move_note_button.visible = false
-		resize_note_button.visible = false
 		options_tab.visible = false
+		back_button.visible = false
 		tab_container.current_tab = 0
 		scroll_container.scroll_vertical = 0
 		if scrlison == true:
 			scroll_container.vertical_scroll_mode = 3
 		islightup = false
+		if tagsisvisbl == true:
+			text_based_margin.modulate.a = 1
+		else:
+			text_based_margin.modulate.a = 0
+		if texture_rect.texture == null:
+			text.modulate.a = 1
+		else:
+			if text.text.strip_edges(true,true) == "":
+				text.modulate.a = 0
+			else:
+				text.modulate.a = 1
 		if Gset.curnotehold != null:
 			if (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5) and Gset.curnotehold != line_2d and note_basis.somenotehovered == false:
 				var nl = Gset.curnotehold
 				nl.set_targetnode(null)
 	else:
+		text.modulate.a = 1
+		#text.visible = true
+		text_based_margin.modulate.a = 1
 		note_basis.somenotehovered = true
 		islightup = false
 		if Gset.curnotehold != null:
@@ -160,9 +187,15 @@ func _process(delta):
 					deltreshold = 0.284
 			connect_to.self_modulate.a = 1
 			add_note.modulate.a = 1
-			move_note_button.visible = true
-			resize_note_button.visible = true
-			options_tab.visible = true
+			resize_note_button.modulate.a = 1
+			if tab_container.current_tab == 0:
+				move_note_button.visible = true
+				options_tab.visible = true
+				back_button.visible = false
+			else:
+				move_note_button.visible = false
+				options_tab.visible = false
+				back_button.visible = true
 			if scrlison == true:
 				scroll_container.vertical_scroll_mode = 1
 				note_basis.canzoom = false
@@ -172,6 +205,9 @@ func _process(delta):
 	if scrlison == false:
 		scroll_container.vertical_scroll_mode = 0
 	
+
+func get_tab_rect():
+	return tab_container.get_global_rect()
 
 func _on_fitin_toggled(toggled_on):
 	scrlison = toggled_on
@@ -271,6 +307,8 @@ func _on_font_size_bigger_pressed():
 func reach_targetnode():
 	return self
 
+func lightupnote():
+	islightup = true
 
 func pass_targetnode(pssin):
 	line_2d.set_targetnode(pssin)
@@ -280,7 +318,7 @@ func get_note_center_pos():
 	return centpos
 
 func _on_add_note_pressed():
-	var nres = load("res://note.tscn")
+	var nres = load("res://scenes/note.tscn")
 	var nnote = nres.instantiate()
 	nnote.global_position = global_position + Vector2(tab_container.get_global_rect().size.x+40,tab_container.get_global_rect().size.y*0.5-60)
 	get_parent().add_child(nnote)
@@ -301,8 +339,14 @@ func _on_def_size_button_pressed():
 
 
 func get_note_data():
-	var nbut : Node2D = line_2d.targetnode
-	
+	var nbut : Node2D
+	if line_2d.targetnode != null:
+		if not line_2d.targetnode.is_queued_for_deletion():
+			nbut = line_2d.targetnode
+		else:
+			nbut = null
+	else:
+		nbut = null
 	var contsaving = ""
 	if nbut != null:
 		contsaving = nbut.name
@@ -316,10 +360,11 @@ func get_note_data():
 		"imagetint": image_tint.visible,
 		"titletext": image_text.text,
 		"titlesize": image_text.get_theme_font_size("font_size"),
-		"isscrolling": clampi(scroll_container.vertical_scroll_mode,0,1),
+		"isscrolling": scrlison,#clampi(scroll_container.vertical_scroll_mode,0,1),
 		"linetarget": contsaving,
 		"text": text.text,
-		"tagsarr": tags_array
+		"tagsarr": tags_array,
+		"tagsvisible": tagsisvisbl
 	}
 	return ndic
 
@@ -331,21 +376,28 @@ func set_note_data(givendic):
 	image_tint.visible = givendic["imagetint"]
 	image_text.text = givendic["titletext"]
 	image_text.add_theme_font_size_override("font_size",givendic["titlesize"])
-	scroll_container.vertical_scroll_mode = givendic["isscrolling"]
+	scrlison = givendic["isscrolling"]
+	#scroll_container.vertical_scroll_mode = givendic["isscrolling"]
 	var contsaving = givendic["linetarget"]
 	for chlds in get_parent().get_children():
 		if chlds.oldname == contsaving:
 			line_2d.targetnode = chlds.reach_targetnode()
 	text.text = givendic["text"]
 	temp_tags_array = givendic["tagsarr"]
+	tagsisvisbl = givendic["tagsvisible"]
 
 
 func _on_add_tag_dialog_confirmed():
 	note_basis.isnotedialog = false
 	#note_basis.canmov = true
 	if add_tag_dialog_text.text.strip_edges(true,true) != "":
-		temp_tags_array.insert(0,add_tag_dialog_text.text.strip_edges(true,true))
+		if not temp_tags_array.has(add_tag_dialog_text.text.strip_edges(true,true)):
+			temp_tags_array.insert(0,add_tag_dialog_text.text.strip_edges(true,true))
 	add_tag_dialog_text.text = ""
+	if tab_container.current_tab == 0:
+		update_tags_apost()
+	if tab_container.current_tab == 2:
+		update_tags_optionlist()
 
 func _on_tags_click_pressed():
 	tab_container.current_tab = 2
@@ -390,6 +442,9 @@ func _on_tab_container_tab_changed(tab):
 	match tab:
 		0:
 			update_tags_apost()
+		1:
+			fitin.button_pressed = scrlison
+			show_tags.button_pressed = tagsisvisbl
 		2:
 			update_tags_optionlist()
 
@@ -402,3 +457,16 @@ func check_tag(tagname):
 
 func _on_add_tag_dialog_canceled():
 	note_basis.isnotedialog = false
+
+
+func _on_show_tags_toggled(toggled_on):
+	tagsisvisbl = toggled_on
+
+
+func _on_go_tags_settings_button_pressed():
+	tab_container.current_tab = 2
+
+
+func _on_add_new_tag_button_pressed():
+	note_basis.isnotedialog = true
+	add_tag_dialog.popup()

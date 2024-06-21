@@ -2,7 +2,7 @@ extends Line2D
 
 @onready var curve = Curve2D.new()
 @onready var connect_to = $".."
-@onready var note = $"../../../../.."
+@onready var note = $"../../../../../.."
 @onready var body = $"../../../.."
 @onready var h_box_container = $"../../.."
 
@@ -29,7 +29,7 @@ func _process(delta):
 		if targetnode == null:
 			visible = false
 		else:
-			targetpos = targetnode.global_position + Vector2(targetnode.cursize.x+18,targetnode.cursize.y*0.5+4)
+			targetpos = targetnode.global_position + Vector2(targetnode.cursize.x+18,targetnode.cursize.y*0.5+35)
 	var mousepos = targetpos - global_position
 	curve.set_point_position(0,Vector2(connect_to.get_global_rect().size.x*1.1,connect_to.get_global_rect().size.y*0.5))
 	
