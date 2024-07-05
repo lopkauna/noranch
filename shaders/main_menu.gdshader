@@ -23,7 +23,7 @@ void fragment()
         {
             uv.y = 3.0 / (abs(uv.y + 0.2) + 0.05);
             uv.x *= uv.y * 1.0;
-            float gridVal = grid(uv, velocity, TIME);
+            float gridVal = grid(uv, velocity, TIME*10.0);
             col = mix(col, vec3(0.5, 0.5, 1.0), gridVal);
         }
         else

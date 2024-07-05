@@ -1,15 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl1tb8xfl6tg2"]
+[gd_scene load_steps=6 format=3 uid="uid://cl1tb8xfl6tg2"]
 
 [ext_resource type="Script" path="res://scripts/note.gd" id="1_88fip"]
+[ext_resource type="Theme" uid="uid://bqbxy1tondj6l" path="res://scenes/defaulttheme.tres" id="2_7fpbl"]
 [ext_resource type="Script" path="res://scripts/Line2D.gd" id="2_a3hhb"]
 [ext_resource type="Script" path="res://scripts/TagsContainer.gd" id="3_5ph0w"]
 
+[sub_resource type="Curve" id="Curve_eeod2"]
+_data = [Vector2(0, 0.252747), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="note" type="Node2D"]
+light_mask = 0
 script = ExtResource("1_88fip")
 
 [node name="body" type="MarginContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -29,11 +36,13 @@ item_3/id = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="body"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_right = 57
 
@@ -46,6 +55,7 @@ theme_override_constants/separation = 0
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "Options"
 
 [node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer"]
@@ -54,18 +64,22 @@ clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("2_7fpbl")
 text = "Move"
 
 [node name="Back" type="Button" parent="body/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
@@ -74,10 +88,13 @@ theme_override_constants/margin_bottom = 0
 [node name="ConnectTo" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("2_7fpbl")
 text = "o"
 
 [node name="Line2D" type="Line2D" parent="body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo"]
+visible = false
 width = 8.0
+width_curve = SubResource("Curve_eeod2")
 default_color = Color(1, 1, 1, 0.564706)
 joint_mode = 2
 begin_cap_mode = 2
@@ -110,20 +127,24 @@ theme_override_constants/separation = 0
 [node name="PanelContainer" type="PanelContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("2_7fpbl")
 
 [node name="TextureRect" type="TextureRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 expand_mode = 5
 stretch_mode = 4
 
 [node name="ImageTint" type="ColorRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 color = Color(0, 0, 0, 0.588235)
 
 [node name="ImageText" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
@@ -138,6 +159,7 @@ layout_mode = 2
 size_flags_vertical = 3
 auto_translate = false
 localize_numeral_system = false
+theme = ExtResource("2_7fpbl")
 context_menu_enabled = false
 wrap_mode = 1
 scroll_smooth = true
@@ -154,6 +176,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_7fpbl")
 text = "Write your note here!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -173,11 +196,13 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("2_7fpbl")
 placeholder_text = "Title Text"
 
 [node name="ClearImageText" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer"]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 text = "Clear"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
@@ -188,27 +213,32 @@ theme_override_constants/separation = 0
 [node name="ImageTintButton" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "Tint"
 
 [node name="FontSizeSmaller" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 text = "-"
 
 [node name="CurrentFontSize" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "  Font Size  "
 horizontal_alignment = 1
 
 [node name="FontSizeBigger" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 text = "+"
 
 [node name="Label3" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
 layout_mode = 2
@@ -217,19 +247,23 @@ theme_override_constants/separation = 0
 [node name="LoadImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "Load Image"
 
 [node name="RemoveImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "Remove Image"
 
 [node name="fitin" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 text = "Enable Note Scrolling"
 
 [node name="ShowTags" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
 layout_mode = 2
+theme = ExtResource("2_7fpbl")
 text = "Display Tags"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
@@ -239,16 +273,19 @@ theme_override_constants/separation = 0
 [node name="GoTagsSettingsButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "Change Tags"
 
 [node name="DefSizeButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_7fpbl")
 text = "Reset Note Size"
 
 [node name="Delete" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
 layout_mode = 2
 size_flags_vertical = 10
+theme = ExtResource("2_7fpbl")
 text = "Delete Note"
 
 [node name="TagsSettings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
@@ -270,6 +307,7 @@ text = "Add New Tag"
 
 [node name="MarginContainer2" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
@@ -279,6 +317,7 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme = ExtResource("2_7fpbl")
 text = "+"
 
 [node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
@@ -286,17 +325,20 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource("2_7fpbl")
 text = "Move"
 
 [node name="ResizeNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme = ExtResource("2_7fpbl")
 text = "Resize"
 
 [node name="TextBasedMargin" type="MarginContainer" parent="body/VBoxContainer"]
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 57
@@ -304,9 +346,13 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Panel" type="Panel" parent="body/VBoxContainer/TextBasedMargin"]
 layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_7fpbl")
 
 [node name="TagsContainer" type="MarginContainer" parent="body/VBoxContainer/TextBasedMargin"]
 layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_7fpbl")
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
@@ -317,6 +363,7 @@ script = ExtResource("3_5ph0w")
 visible = false
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("2_7fpbl")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 
@@ -343,7 +390,7 @@ dialog_hide_on_ok = true
 cancel_button_text = "Убрать каритнку"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.png")
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")
 use_native_dialog = true
 
 [node name="AddTagDialog" type="ConfirmationDialog" parent="."]
@@ -355,6 +402,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 192.0
 offset_bottom = 51.0
+theme = ExtResource("2_7fpbl")
 placeholder_text = "Enter Tag"
 
 [connection signal="index_pressed" from="body/PopupMenu" to="." method="_on_popup_menu_index_pressed"]

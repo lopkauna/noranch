@@ -1,21 +1,34 @@
 extends Node2D
 
+
+@onready var main_menu = $"CanvasLayer/Control/HBoxContainer/Main Menu"
+@onready var load = $CanvasLayer/Control/HBoxContainer/Load
+@onready var save = $CanvasLayer/Control/HBoxContainer/Save
+@onready var clear = $CanvasLayer/Control/HBoxContainer/Clear
+@onready var search = $CanvasLayer/Control/HBoxContainer2/Search
+@onready var prev = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/HBoxContainer/Prev
+@onready var next = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/HBoxContainer/Next
+@onready var tag_search_line_edit = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel/TagSearchLineEdit
+@onready var loading_status = $CanvasLayer/Control/LoadingStatus
+
+
 @onready var camera_2d = $Camera2D
 @onready var load_dialog = $CanvasLayer/LoadDialog
 @onready var save_dialog = $CanvasLayer/SaveDialog
+@onready var rewrite_file_confirmation = $CanvasLayer/RewriteFileConfirmation
 @onready var color_rect = $ParallaxBackground/ColorRect
 @onready var color_rect_2 = $ParallaxBackground/ColorRect2
 @onready var popup_menu = $PopupMenu
 @onready var notes_table = $"Notes Table"
 @onready var greetings = $Greetings
 @onready var tag_finder_panel = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel
-@onready var search = $CanvasLayer/Control/HBoxContainer2/Search
-@onready var tag_search_line_edit = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel/TagSearchLineEdit
 @onready var match_count = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control/VBoxContainer/Panel/MatchCount
 @onready var find_tag_control = $CanvasLayer/Control/HBoxContainer2/TagFinderPanel/Control
 
 @onready var selection = $selection
 
+#@onready var NOTE_SCENE_PATH = "res://scenes/note.tscn"
+@onready var nres = preload("res://scenes/note.tscn")
 
 const last_unsaved_session_path = "user://lastunsavedsession.data"
 const last_sessions_array_path = "user://lastsessionsarray.data"
@@ -37,8 +50,21 @@ var isselectionon = false
 var selectionstart = Vector2(0,0)
 var selectionarr : Array = []
 
+var isfullloaded := false
+
+var ldcntlast = 0
+var loadcntquote = 0
+
+var temploadarr := []
+var percentagetotext := 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var frame_budget_usec := floori(1000000 / float(Engine.get_physics_ticks_per_second()))
+	var frame_budget_threshold_usec := 5000
+	CallThrottled.start(frame_budget_usec, frame_budget_threshold_usec)
+	CallThrottled.connect("waiting_count_change", Callable(self, "_on_waiting_count_change"))
+	#ResourceLoader.load_threaded_request(NOTE_SCENE_PATH)
 	search.button_pressed = tag_finder_panel.visible
 	if Gset.BIFS == true:
 		load_dialog.use_native_dialog = false
@@ -47,11 +73,13 @@ func _ready():
 		load_dialog.use_native_dialog = true
 		save_dialog.use_native_dialog = true
 	if Gset.temp_dic.size()>0: #!= null:
-		loc_load()
+		first_load()
+	else:
+		isfullloaded = true
 	color_rect.visible = Gset.GridBG
 	color_rect_2.visible = Gset.AnimatedBG
 	greetings.visible = -clamp(notes_table.get_child_count()-1,-1,0)
-	greetings.text = "Create your first note with [" + "Right Mouse Button" + "
+	greetings.text = "Create your first note with [" + "Right Mouse Button" + "] 
 or just Drag and Drop file here" #InputMap.action_get_events(action)[0].as_text()
 	load_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	save_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -60,7 +88,18 @@ or just Drag and Drop file here" #InputMap.action_get_events(action)[0].as_text(
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	if ldcntlast == 0 and not temploadarr.is_empty() and notes_table.get_child_count()>0:
+		for j in temploadarr.size():
+			notes_table.get_children()[j].set_note_data(temploadarr[j])
+		temploadarr = []
+		loadcntquote = 0
+		isfullloaded = true
+		#print(notes_table.get_child_count())
+	if isfullloaded == false:
+		loading_status.visible = true
+		return
+	else:
+		loading_status.visible = false
 	if search.button_pressed == true:
 		if get_viewport().get_mouse_position().x == clampf(get_viewport().get_mouse_position().x,find_tag_control.get_global_rect().position.x,find_tag_control.get_global_rect().end.x):#get_global_rect().position.x <= get_global_mouse_position().x and get_global_rect().end.x >= get_global_mouse_position().x:
 			if get_viewport().get_mouse_position().y == clampf(get_viewport().get_mouse_position().y,find_tag_control.get_global_rect().position.y,find_tag_control.get_global_rect().end.y):#get_global_rect().position.y <= get_global_mouse_position().y and get_global_rect().end.y >= get_global_mouse_position().y:
@@ -101,8 +140,8 @@ func _process(delta):
 				popup_menu.remove_item(3)
 			popup_menu.size.y = 89
 		popup_menu.popup(Rect2(get_viewport().get_mouse_position().x,get_viewport().get_mouse_position().y,popup_menu.size.x,popup_menu.size.y))
-	if somenotehovered == false and Input.get_mouse_button_mask() == 1 and isselectionon == false:
-		if popup_menu.visible == false:
+	if somenotehovered == false and Input.get_mouse_button_mask() == 1:
+		if popup_menu.visible == false and isselectionon == false:
 			selectionarr = []
 			isselectionon = true
 			selectionstart = get_global_mouse_position()
@@ -152,10 +191,10 @@ func _process(delta):
 		save_unsaved_note()
 	if not Input.is_action_pressed("fastmv") or not direction:
 		fastmovecharge = 0
-	if direction and canmov:
+	if direction and canmov and not Input.is_action_pressed("quicksaveshrtcut"):
 		if Input.is_action_pressed("fastmv"):
 			camera_2d.global_position += ((direction*accel) / camera_2d.zoom.x)*clampf(fastmovecharge,2,4)
-			fastmovecharge = move_toward(fastmovecharge,4,delta)
+			fastmovecharge = move_toward(fastmovecharge,4,delta*10)
 		else:
 			camera_2d.global_position += (direction / camera_2d.zoom.x) * 2
 	if Input.is_action_pressed("movenotes"):
@@ -185,6 +224,25 @@ func _process(delta):
 	#canmov = true
 	if load_dialog.visible == true or save_dialog.visible == true:
 		canzoom = false
+	if Input.is_action_just_pressed("quicksaveshrtcut"):
+		if Gset.currentpath == "" and save_dialog.visible == false:
+			isnotedialog = true
+			save_dialog.popup()
+		else:
+			isnotedialog = true
+			rewrite_file_confirmation.popup()
+			#save_file_by_path(Gset.currentpath)
+	if Input.is_action_just_pressed("ui_cancel"):
+		if rewrite_file_confirmation.visible == true:
+			rewrite_file_confirmation.visible = false
+		main_menu.release_focus()
+		load.release_focus()
+		save.release_focus()
+		clear.release_focus()
+		search.release_focus()
+		prev.release_focus()
+		next.release_focus()
+		tag_search_line_edit.release_focus()
 
 
 func _input(event):
@@ -214,14 +272,18 @@ func _on_load_pressed():
 
 
 func _on_save_pressed():
-	isnotedialog = true
-	save_dialog.popup()
+	if Gset.currentpath == "":
+		isnotedialog = true
+		save_dialog.popup()
+	else:
+		isnotedialog = true
+		rewrite_file_confirmation.popup()
+		
 
 
 func _on_popup_menu_index_pressed(index):
 	match index:
 		0:
-			var nres = load("res://scenes/note.tscn")
 			var nnote = nres.instantiate()
 			nnote.global_position = get_global_mouse_position() - Vector2(168,48)
 			notes_table.add_child(nnote)
@@ -239,9 +301,7 @@ func _on_popup_menu_index_pressed(index):
 				selectionarr = []
 				save_unsaved_note()
 
-
-func _on_save_dialog_file_selected(path):
-	isnotedialog = false
+func save_file_by_path(path:String):
 	var svarr : Array = []
 	for chldd in notes_table.get_children():
 		svarr.append(chldd.get_note_data())
@@ -263,6 +323,10 @@ func _on_save_dialog_file_selected(path):
 	tfile.close()
 	Gset.temp_dic = []
 
+func _on_save_dialog_file_selected(path):
+	isnotedialog = false
+	save_file_by_path(path)
+
 func loc_save():
 	var svarr : Array = []
 	for chldj in notes_table.get_children():
@@ -272,6 +336,7 @@ func loc_save():
 		Gset.temp_dic = svarr
 	else:
 		Gset.temp_dic = []
+
 
 func save_unsaved_note():
 	var svarr : Array = []
@@ -285,6 +350,9 @@ func save_unsaved_note():
 	else:
 		Gset.temp_dic = []
 
+func first_load():
+	loc_load()
+	#isfullloaded = true
 
 func loc_load():
 	for chld in notes_table.get_children():
@@ -292,13 +360,23 @@ func loc_load():
 	var ldarr : Array = []
 	ldarr = Gset.temp_dic
 	if not ldarr.is_empty():
-		for i in ldarr.size():
-			var nres = load("res://scenes/note.tscn")
-			var nnote = nres.instantiate()
+		var cb := func(iddddd):
+			var nnote := nres.instantiate()
 			notes_table.add_child(nnote)
-			nnote.oldname = ldarr[i-ldarr.size()]["oldname"]
-		for j in ldarr.size():
-			notes_table.get_children()[j-ldarr.size()].set_note_data(ldarr[j-ldarr.size()])
+			nnote.oldname = ldarr[iddddd-ldarr.size()]["oldname"]
+		for i in ldarr.size():
+			CallThrottled.call_throttled(cb,[i])
+		loadcntquote = ldarr.size()
+		temploadarr = ldarr
+		#for j in ldarr.size():
+		#	notes_table.get_children()[j-ldarr.size()].set_note_data(ldarr[j-ldarr.size()])
+
+func _on_waiting_count_change(waiting_count : int) -> void:
+	ldcntlast = waiting_count
+	percentagetotext = 100-int(float(ldcntlast) / float(loadcntquote) * 100)
+	loading_status.text = "Loading " + str(percentagetotext) + "%"
+	#print("Loading " + str(percentagetotext) + "%")
+	#print("There are %s calls waiting" % [waiting_count])
 
 func _on_load_dialog_file_selected(path):
 	isnotedialog = false
@@ -308,6 +386,7 @@ func load_file_by_path(path):
 	for chld in notes_table.get_children():
 		chld.queue_free()
 	if FileAccess.file_exists(path):
+		Gset.currentpath = path
 		var ldarr : Array = []
 		var file = FileAccess.open(path,FileAccess.READ)
 		#var temp_jstrng = file.get_var()
@@ -316,13 +395,20 @@ func load_file_by_path(path):
 		file.close()
 		ldarr = temp_arr
 		ldarr.reverse()
-		for i in ldarr.size():
-			var nres = load("res://scenes/note.tscn")
-			var nnote = nres.instantiate()
+		var cb := func(iddddd):
+			var nnote := nres.instantiate()
 			notes_table.add_child(nnote)
-			nnote.oldname = ldarr[i-ldarr.size()]["oldname"]
-		for j in ldarr.size():
-			notes_table.get_children()[j-ldarr.size()].set_note_data(ldarr[j-ldarr.size()])
+			nnote.oldname = ldarr[iddddd-ldarr.size()]["oldname"]
+		for i in ldarr.size():
+			CallThrottled.call_throttled(cb,[i])
+		loadcntquote = ldarr.size()
+		temploadarr = ldarr
+		#for i in ldarr.size():
+			#var nnote = nres.instantiate()
+			#notes_table.add_child(nnote)
+			#nnote.oldname = ldarr[i-ldarr.size()]["oldname"]
+		#for j in ldarr.size():
+			#notes_table.get_children()[j-ldarr.size()].set_note_data(ldarr[j-ldarr.size()])
 	var sldarr : Array = []
 	if FileAccess.file_exists(last_sessions_array_path):
 		var sfile = FileAccess.open(last_sessions_array_path,FileAccess.READ)
@@ -338,12 +424,11 @@ func load_file_by_path(path):
 func on_files_drop(files):
 	var path : String = files[0]
 	match path.get_extension():
-		"png":
+		"png","jpg","jpeg":
 			var img = Image.new()
 			img.load(path)
 			var imgtxtr = ImageTexture.new()
 			imgtxtr.set_image(img)
-			var nres = load("res://scenes/note.tscn")
 			var nnote = nres.instantiate()
 			nnote.global_position = get_global_mouse_position() - Vector2(168,48)
 			notes_table.add_child(nnote)
@@ -422,3 +507,20 @@ func _on_load_dialog_confirmed():
 
 func _on_save_dialog_confirmed():
 	isnotedialog = false
+
+
+func _on_rewrite_file_confirmation_newone():
+	rewrite_file_confirmation.visible = false
+	save_dialog.popup()
+
+
+func _on_rewrite_file_confirmation_sameone():
+	rewrite_file_confirmation.visible = false
+	save_file_by_path(Gset.currentpath)
+	canmov = true
+
+
+func _on_rewrite_file_confirmation_close_requested():
+	rewrite_file_confirmation.visible = false
+
+

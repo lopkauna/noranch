@@ -4,13 +4,15 @@ const keymap_path = "user://keymaps.data"
 const interface_preference_path = "user://interface.data"
 var interface_preference : Dictionary
 var keymaps : Dictionary
-@onready var binds = $CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds
-@onready var tab_control = $CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl
-@onready var use_animated_background = $CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/AnimatedBackground
-@onready var use_grid_for_notes = $CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/UseGridForNotes
+@onready var binds = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds
+@onready var tab_control = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl
+@onready var use_animated_background = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/AnimatedBackground
+@onready var use_grid_for_notes = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/UseGridForNotes
 @onready var color_rect = $ParallaxBackground/ColorRect
 @onready var color_rect_2 = $ParallaxBackground/ColorRect2
-@onready var use_build_in_file_system = $CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/UseBuildInFileSystem
+@onready var use_build_in_file_system = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/UseBuildInFileSystem
+@onready var open_user_theme_settings = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/OpenUserThemeSettings
+@onready var style_tab_container = $CanvasLayer/Control/VBoxContainer2/StyleTabContainer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -191,3 +193,17 @@ func _on_rich_text_label_meta_clicked(meta):
 func _on_use_build_in_file_system_toggled(toggled_on):
 	interface_preference["flsyst"] = toggled_on
 	save_interface()
+
+
+func _on_theme_choose_button_item_selected(index):
+	match index:
+		0:
+			open_user_theme_settings.visible = false
+		1:
+			open_user_theme_settings.visible = false
+		2:
+			open_user_theme_settings.visible = true
+
+
+func _on_open_user_theme_settings_pressed():
+	style_tab_container.current_tab = 1

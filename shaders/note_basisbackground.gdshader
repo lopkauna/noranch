@@ -23,5 +23,5 @@ void fragment( )
 	float freq = clamp( cos( uv.x * line_freq ) * 3.0, 0.0, 1.0 ) * height;
 	float line = 1.0 - clamp( abs( freq - mod( uv.y, 1.0 ) ) * 11.0, 0.0, 1.0 );
 
-	COLOR = mix( background_color, line_color, line * mod( uv.x - TIME * speed * abs( shift ), 1.0 ) /*  * mod( TIME + shift, 1.0 ) */ );
+	COLOR = mix( background_color, line_color, line * mod( uv.x - TIME*6.0 * speed * abs( shift ), 1.0 ) /*  * mod( TIME + shift, 1.0 ) */ );
 }

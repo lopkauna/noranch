@@ -40,10 +40,10 @@ mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 192.0
-offset_bottom = 42.0
+offset_right = 330.0
+offset_bottom = 31.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_constants/separation = 2
 
 [node name="Main Menu" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
@@ -134,6 +134,21 @@ layout_mode = 2
 size_flags_horizontal = 10
 text = "Next"
 
+[node name="LoadingStatus" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Notes Is Loading"
+
 [node name="LoadDialog" type="FileDialog" parent="CanvasLayer"]
 title = "Open a File"
 initial_position = 2
@@ -155,6 +170,39 @@ min_size = Vector2i(600, 400)
 ok_button_text = "Сохранить"
 access = 2
 filters = PackedStringArray("*.notdat")
+
+[node name="RewriteFileConfirmation" type="Window" parent="CanvasLayer"]
+title = "Save File"
+initial_position = 2
+size = Vector2i(289, 100)
+visible = false
+
+[node name="MarginContainer" type="VBoxContainer" parent="CanvasLayer/RewriteFileConfirmation"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/RewriteFileConfirmation/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Save in same file or create new one"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/RewriteFileConfirmation/MarginContainer"]
+layout_mode = 2
+
+[node name="Accept" type="Button" parent="CanvasLayer/RewriteFileConfirmation/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Replace Current"
+
+[node name="Decline" type="Button" parent="CanvasLayer/RewriteFileConfirmation/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Create New One"
 
 [node name="selection" type="ColorRect" parent="."]
 visible = false
@@ -259,4 +307,7 @@ item_2/id = 2
 [connection signal="canceled" from="CanvasLayer/SaveDialog" to="." method="_on_save_dialog_canceled"]
 [connection signal="confirmed" from="CanvasLayer/SaveDialog" to="." method="_on_save_dialog_confirmed"]
 [connection signal="file_selected" from="CanvasLayer/SaveDialog" to="." method="_on_save_dialog_file_selected"]
+[connection signal="close_requested" from="CanvasLayer/RewriteFileConfirmation" to="." method="_on_rewrite_file_confirmation_close_requested"]
+[connection signal="pressed" from="CanvasLayer/RewriteFileConfirmation/MarginContainer/HBoxContainer/Accept" to="." method="_on_rewrite_file_confirmation_sameone"]
+[connection signal="pressed" from="CanvasLayer/RewriteFileConfirmation/MarginContainer/HBoxContainer/Decline" to="." method="_on_rewrite_file_confirmation_newone"]
 [connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]

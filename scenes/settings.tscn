@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://clae42bgn2ptb"]
+[gd_scene load_steps=9 format=3 uid="uid://clae42bgn2ptb"]
 
 [ext_resource type="Script" path="res://scripts/settings.gd" id="1_qh4ox"]
 [ext_resource type="Script" path="res://scripts/buttonremmaper.gd" id="2_ctgt5"]
+[ext_resource type="Theme" uid="uid://bqbxy1tondj6l" path="res://scenes/defaulttheme.tres" id="2_yp0qm"]
 [ext_resource type="Shader" path="res://shaders/settingsbackgroundshader.gdshader" id="3_ddqrv"]
+[ext_resource type="Script" path="res://scenes/SettingsLine2D.gd" id="4_5lhd1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj3i6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1yei"]
+content_margin_top = 4.0
+content_margin_bottom = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_le0qf"]
 shader = ExtResource("3_ddqrv")
@@ -45,7 +53,13 @@ theme_override_constants/separation = 2
 layout_mode = 2
 text = "Main Menu"
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2"]
+[node name="StyleTabContainer" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vj3i6")
+tabs_visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 0
@@ -53,243 +67,267 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="TabControl" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer"]
+[node name="TabControl" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 tabs_visible = false
 use_hidden_tabs_for_min_size = true
 
-[node name="MainMenu" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+[node name="MainMenu" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
 custom_minimum_size = Vector2(320, 80)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
 layout_mode = 2
 text = "Main Menu Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoToInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+[node name="GoToInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
 layout_mode = 2
 text = "Interface"
 
-[node name="GoToBinding" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+[node name="GoToBinding" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
 layout_mode = 2
 text = "Binds"
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GoToCredits" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/MarginContainer"]
+[node name="GoToCredits" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Credits"
 
-[node name="Interface" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+[node name="Interface" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
 visible = false
 layout_mode = 2
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
 layout_mode = 2
 text = "Interface Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
 layout_mode = 2
 text = "Go Back"
 
-[node name="AnimatedBackground" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+[node name="AnimatedBackground" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Use Animated Background  "
 
-[node name="UseGridForNotes" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+[node name="UseGridForNotes" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Use Grid"
 
-[node name="UseBuildInFileSystem" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+[node name="UseBuildInFileSystem" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Use Build In File System"
 
-[node name="ResetInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface"]
+[node name="ResetInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
 layout_mode = 2
 text = "Reset Interface"
 
-[node name="Binds" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+[node name="ThemeChooseLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n1yei")
+text = "Chose Theme"
+horizontal_alignment = 1
+
+[node name="ThemeChooseButton" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+visible = false
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Dark Theme"
+popup/item_0/id = 0
+popup/item_1/text = "Light Theme"
+popup/item_1/id = 1
+popup/item_2/text = "Custom Theme"
+popup/item_2/id = 2
+
+[node name="OpenUserThemeSettings" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+visible = false
+layout_mode = 2
+text = "Set Custom Theme Colors"
+
+[node name="Binds" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 text = "Binding Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 text = "Go Back"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="MoveNotesLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer"]
+[node name="MoveNotesLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Notes"
 
-[node name="MoveNotesButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer"]
+[node name="MoveNotesButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "movenotes"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="ZoomInLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer2"]
+[node name="ZoomInLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zoom In"
 
-[node name="ZoomInButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer2"]
+[node name="ZoomInButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer2"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "zoomin"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="ZoomOutLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer3"]
+[node name="ZoomOutLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zoom Out"
 
-[node name="ZoomOutButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer3"]
+[node name="ZoomOutButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer3"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "zoomout"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="ZoomDefLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer4"]
+[node name="ZoomDefLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Default Zoom"
 
-[node name="ZoomDefButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer4"]
+[node name="ZoomDefButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer4"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "defzoom"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="UpLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer5"]
+[node name="UpLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Up"
 
-[node name="UpButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer5"]
+[node name="UpButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer5"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "up"
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="DownLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer6"]
+[node name="DownLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Down"
 
-[node name="DownButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer6"]
+[node name="DownButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer6"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "down"
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="LeftLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer7"]
+[node name="LeftLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer7"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Left"
 
-[node name="LeftButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer7"]
+[node name="LeftButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer7"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "left"
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer8" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="RightLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer8"]
+[node name="RightLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer8"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Right"
 
-[node name="RightButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer8"]
+[node name="RightButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer8"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "right"
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 layout_mode = 2
 alignment = 2
 
-[node name="FastMoveLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer9"]
+[node name="FastMoveLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer9"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Faster Movement"
 
-[node name="FastMoveButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/HBoxContainer9"]
+[node name="FastMoveButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer9"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "fastmv"
 
-[node name="ResetBindsButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds"]
+[node name="ResetBindsButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 text = "Reset all binds"
 
-[node name="Credits" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl"]
+[node name="Credits" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
 visible = false
 layout_mode = 2
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits"]
 layout_mode = 2
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits"]
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits"]
 layout_mode = 2
 text = "Go Back"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits"]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -300,7 +338,213 @@ Notes Background Shader:
 [url]https://godotshaders.com/shader/procedural-electric-background-shader/[/url]
 
 Settings Menu Shader:
-[url]https://godotshaders.com/shader/animated-stripes/[/url]"
+[url]https://godotshaders.com/shader/animated-stripes/[/url]
+
+GodotCallThrottled[plugin]:
+[url]https://github.com/ImmersiveRPG/GodotCallThrottled/tree/master[/url]"
+
+[node name="StyleExampleContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer"]
+layout_mode = 2
+
+[node name="ThemePreview" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 100
+
+[node name="ColorPickersList" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme = ExtResource("2_yp0qm")
+
+[node name="ThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_yp0qm")
+text = "Chose Your Theme Colors"
+
+[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultTextColor"]
+layout_mode = 2
+text = "Default Text Color"
+
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultTextColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="InactiveTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelInactiveTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InactiveTextColor"]
+layout_mode = 2
+text = "Inactive Text Color"
+
+[node name="PickerInactiveTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InactiveTextColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="DefaultMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultMateColor"]
+layout_mode = 2
+text = "Default Mate Color"
+
+[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultMateColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="HoweredMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelHoweredMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredMateColor"]
+layout_mode = 2
+text = "Howered Mate Color"
+
+[node name="PickerHoweredMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredMateColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="InUseMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelInUseMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InUseMateColor"]
+layout_mode = 2
+text = "In Use Mate Color"
+
+[node name="PickerInUseMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InUseMateColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="DefaultOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultOutlineColor"]
+layout_mode = 2
+text = "Default Outline Color"
+
+[node name="PickerDefaultOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultOutlineColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="HoweredOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelHoweredOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredOutlineColor"]
+layout_mode = 2
+text = "Howered Outline Color"
+
+[node name="PickerHoweredOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredOutlineColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelLineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/LineColor"]
+layout_mode = 2
+text = "Line Color"
+
+[node name="PickerLineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/LineColor"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 1)
+
+[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="DecoyLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme = ExtResource("2_yp0qm")
+text = "Colors Preview"
+horizontal_alignment = 1
+
+[node name="DecoyTextEdit" type="TextEdit" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+custom_minimum_size = Vector2(200, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_yp0qm")
+placeholder_text = "Text Edit Example"
+context_menu_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+
+[node name="DecoyCheckButton" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+text = "Check Button Example"
+
+[node name="DecoyButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_yp0qm")
+text = "Button Example"
+
+[node name="ThemeControls" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="CancelThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("2_yp0qm")
+text = "Cancel"
+
+[node name="ResetThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_yp0qm")
+text = "Reset"
+
+[node name="SaveThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_yp0qm")
+text = "Save"
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer"]
+width = 8.0
+default_color = Color(1, 1, 1, 0.564706)
+script = ExtResource("4_5lhd1")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -331,15 +575,17 @@ grow_vertical = 2
 color = Color(0.533037, 0.533037, 0.533037, 0.615686)
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/HBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/GoToInterface" to="." method="_on_go_to_interface_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/GoToBinding" to="." method="_on_go_to_binding_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/MainMenu/MarginContainer/GoToCredits" to="." method="_on_go_to_credits_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/GoBack" to="." method="_on_go_back_pressed"]
-[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/AnimatedBackground" to="." method="_on_animated_background_toggled"]
-[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/UseGridForNotes" to="." method="_on_use_grid_for_notes_toggled"]
-[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/UseBuildInFileSystem" to="." method="_on_use_build_in_file_system_toggled"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Interface/ResetInterface" to="." method="_on_reset_interface_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/GoBack" to="." method="_on_go_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Binds/ResetBindsButton" to="." method="_on_reset_binds_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits/GoBack" to="." method="_on_go_back_pressed"]
-[connection signal="meta_clicked" from="CanvasLayer/Control/VBoxContainer2/MarginContainer/TabControl/Credits/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu/GoToInterface" to="." method="_on_go_to_interface_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu/GoToBinding" to="." method="_on_go_to_binding_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu/MarginContainer/GoToCredits" to="." method="_on_go_to_credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/AnimatedBackground" to="." method="_on_animated_background_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/UseGridForNotes" to="." method="_on_use_grid_for_notes_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/UseBuildInFileSystem" to="." method="_on_use_build_in_file_system_toggled"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/ResetInterface" to="." method="_on_reset_interface_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/ThemeChooseButton" to="." method="_on_theme_choose_button_item_selected"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface/OpenUserThemeSettings" to="." method="_on_open_user_theme_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/ResetBindsButton" to="." method="_on_reset_binds_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="meta_clicked" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

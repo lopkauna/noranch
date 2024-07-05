@@ -12,7 +12,7 @@ void fragment() {
 	float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
 	float xDistance = abs(xFraction - 0.5);
 	float yDistance = abs(yFraction - 0.5);
-	if (xDistance + yDistance + UV.x + UV.y > progress * (0.38-0.4*cos(TIME)) * 4.0) {
+	if (xDistance + yDistance + UV.x + UV.y > progress * (0.38-0.4*cos(TIME*10.0)) * 4.0) {
 		discard;
 	}
 }

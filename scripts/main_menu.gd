@@ -16,6 +16,7 @@ var interface_preference : Dictionary
 
 var desired_alpha = 0
 var alpha_timer = 0
+var flpth : String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,6 +34,13 @@ func _ready():
 	load_keymaps()
 	load_interface()
 	get_tree().get_root().files_dropped.connect(on_files_drop)
+	if Gset.firstrt == false:
+		for argument in OS.get_cmdline_args():
+			if argument.find("=") == -1:
+				if argument.is_absolute_path() and (not "user://".is_subsequence_of(argument) and not "res://".is_subsequence_of(argument)):
+					#flpth = str(argument)
+					flpth = str(argument)
+
 
 func pack_last_saved_sessions():
 	check_last_saved_sessions()
@@ -55,8 +63,7 @@ func pack_last_saved_sessions():
 				nbut.connect("pressed",Callable(self,"ld_prev_note").bind(lastsessionsarray[i]))
 				nbut.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-func on_files_drop(files):
-	var path : String = files[0]
+func loadfilefrompath(path):
 	match path.get_extension():
 		"notdat":
 			if FileAccess.file_exists(path):
@@ -64,9 +71,13 @@ func on_files_drop(files):
 				var temp_session_arr = file.get_var(true) as Array
 				if temp_session_arr.size()>0:
 					Gset.temp_dic = temp_session_arr
+					Gset.currentpath = path
 				get_tree().change_scene_to_file("res://scenes/note_basis.tscn")
 			else:
 				alpha_timer = 2
+
+func on_files_drop(files):
+	loadfilefrompath(files[0])
 
 func del_prev_note_in_history(lstpath):
 	lastsessionsarray.erase(lstpath)
@@ -90,17 +101,22 @@ func ld_prev_note(lstpath):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Gset.firstrt == false:
+		Gset.firstrt = true
+	if flpth != "":
+		loadfilefrompath(flpth)
+		flpth = ""
 	if note_trees_buttons.get_child_count() > 0:
 		rescent_note_trees.visible = true
 	else:
 		rescent_note_trees.visible = false
 	color_rect_2.visible = Gset.AnimatedBG
 	color_rect.visible = Gset.AnimatedBG
-	alpha_timer = move_toward(alpha_timer,0,delta)
+	alpha_timer = move_toward(alpha_timer,0,delta*10)
 	if alpha_timer>0:
-		desired_alpha = move_toward(desired_alpha,1,delta*4)
+		desired_alpha = move_toward(desired_alpha,1,delta*4*10)
 	else:
-		desired_alpha = move_toward(desired_alpha,0,delta)
+		desired_alpha = move_toward(desired_alpha,0,delta*10)
 	message.modulate.a = clampf(desired_alpha,0,1)
 
 func check_last_unsaved_session():
@@ -160,6 +176,7 @@ func load_interface():
 func _on_go_nots_pressed():
 	get_tree().change_scene_to_file("res://scenes/note_basis.tscn")
 	Gset.temp_dic = []
+	Gset.currentpath = ""
 
 func _on_settings_pressed():
 	get_tree().change_scene_to_file("res://scenes/settings.tscn")

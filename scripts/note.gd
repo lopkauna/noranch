@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var note_basis = $"../.."
+@onready var camera_2d = $"../../Camera2D"
+
 @onready var body = $body
 @onready var tab_container = $body/VBoxContainer/HBoxContainer/TabContainer
 @onready var fitin = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/fitin
@@ -74,6 +76,15 @@ func _ready():
 	
 
 func _process(delta):
+	if camera_2d.global_position.distance_to(global_position + Vector2(tab_container.get_global_rect().size.x*0.5+22,tab_container.get_global_rect().size.y*0.5+4)) > (get_viewport_rect().size.x + get_viewport_rect().size.y) * (1.35-camera_2d.zoom.x*0.25):
+		hide()
+		line_2d.set_process(false)
+		tags_container.set_process(false)
+		return
+	else:
+		line_2d.set_process(true)
+		tags_container.set_process(true)
+		show()
 	tags_settings.custom_minimum_size.y = scroll_container.size.y
 	settings_tab.custom_minimum_size.y = scroll_container.size.y
 	if add_tag_dialog.visible == true:
@@ -81,6 +92,12 @@ func _process(delta):
 	
 	match tab_container.current_tab:
 		0:
+			#print(text.get_focus_owner())
+			if text.has_focus():
+				if Input.is_action_just_pressed("ui_cancel"):
+					text.release_focus()
+				if Input.is_action_just_pressed("crnextnoteshrtcut"):
+					create_next_note()
 			if temp_tags_array != tags_array:
 				tags_array.clear()
 				tags_array.append_array(temp_tags_array)
@@ -99,9 +116,9 @@ func _process(delta):
 	light_up.global_position = tab_container.get_global_rect().position - Vector2(4,4)
 	light_up.size = tab_container.get_global_rect().size + Vector2(8,8)
 	if islightup == true:
-		light_up.self_modulate.a = move_toward(light_up.self_modulate.a,0.164,delta)
+		light_up.self_modulate.a = move_toward(light_up.self_modulate.a,0.164,delta*10)
 	else:
-		light_up.self_modulate.a = move_toward(light_up.self_modulate.a,0.0,delta)
+		light_up.self_modulate.a = move_toward(light_up.self_modulate.a,0.0,delta*10)
 	cursize = tab_container.get_global_rect().size
 	if text.text == "":
 		label.visible = true
@@ -111,15 +128,18 @@ func _process(delta):
 	if is_connecting_to == true:
 		note_basis.somenotehovered = true
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
-			is_connecting_to = false
 			Gset.curnotehold = null
+			is_connecting_to = false
+			
 	if isrsng == true:
+		note_basis.somenotehovered = true
 		vsbl = 0
 		tab_container.custom_minimum_size.x = clampf(get_global_mouse_position().x - tab_container.global_position.x + rsoffset.x,160,4000)#) - tab_container.global_position
 		tab_container.custom_minimum_size.y = clampf(get_global_mouse_position().y - tab_container.global_position.y + rsoffset.y,92,2000)#) - tab_container.global_position
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
 			isrsng = false
 	if ismvng == true:
+		note_basis.somenotehovered = true
 		self.global_position = get_global_mouse_position() + mvoffset
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
 			ismvng = false
@@ -136,8 +156,8 @@ func _process(delta):
 		image_tint_button.self_modulate.a = 1
 		scroll_container.custom_minimum_size.y = texture_rect.get_global_rect().size.y
 		remove_image.visible = true
-	vsbl = move_toward(vsbl,0,delta)
-	deltreshold = move_toward(deltreshold,0,delta)
+	vsbl = move_toward(vsbl,0,delta*10)
+	deltreshold = move_toward(deltreshold,0,delta*10)
 	if vsbl <= 0:
 		if is_connecting_to == false:
 			connect_to.self_modulate.a = 0
@@ -165,7 +185,9 @@ func _process(delta):
 		if Gset.curnotehold != null:
 			if (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5) and Gset.curnotehold != line_2d and note_basis.somenotehovered == false:
 				var nl = Gset.curnotehold
-				nl.set_targetnode(null)
+				nl.set_targetnote(null)
+		if Input.get_mouse_button_mask() == 1 and text.has_focus():
+			text.release_focus()
 	else:
 		text.modulate.a = 1
 		#text.visible = true
@@ -175,7 +197,9 @@ func _process(delta):
 		if Gset.curnotehold != null:
 			if (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5) and Gset.curnotehold != line_2d:
 				var nl = Gset.curnotehold
-				nl.set_targetnode(self)
+				nl.set_targetnote(self)
+				if line_2d.targetnode == nl.get_papa_note():
+					line_2d.set_targetnote(null)
 				islightup = true
 		else:
 			if Input.get_mouse_button_mask() == 2:
@@ -268,7 +292,9 @@ func _on_text_focus_exited():
 
 func _on_connect_to_button_down():
 	Gset.curnotehold = line_2d
+	line_2d.set_targetnote(null)
 	is_connecting_to = true
+	
 
 
 func _on_back_pressed():
@@ -311,20 +337,23 @@ func lightupnote():
 	islightup = true
 
 func pass_targetnode(pssin):
-	line_2d.set_targetnode(pssin)
+	line_2d.set_targetnote(pssin)
 
 func get_note_center_pos():
 	var centpos = global_position + Vector2(tab_container.get_global_rect().size.x*0.5+22,tab_container.get_global_rect().size.y*0.5+4)
 	return centpos
 
 func _on_add_note_pressed():
+	create_next_note()
+
+func create_next_note():
 	var nres = load("res://scenes/note.tscn")
 	var nnote = nres.instantiate()
 	nnote.global_position = global_position + Vector2(tab_container.get_global_rect().size.x+40,tab_container.get_global_rect().size.y*0.5-60)
 	get_parent().add_child(nnote)
 	nnote.pass_targetnode(self)
+	nnote.text.grab_focus()
 	note_basis.repos_cam(nnote.global_position + Vector2(160,64))
-
 
 func _on_options_tab_pressed():
 	tab_container.current_tab = 1
