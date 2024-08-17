@@ -13,7 +13,7 @@ point_count = 2
 light_mask = 0
 script = ExtResource("1_88fip")
 
-[node name="body" type="MarginContainer" parent="."]
+[node name="body" type="MarginContainer" parent="." groups=["themegrp"]]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -26,7 +26,6 @@ theme_override_constants/margin_bottom = 4
 size = Vector2i(100, 62)
 item_count = 4
 item_0/text = "Delete Note"
-item_0/id = 0
 item_1/text = "Options"
 item_1/id = 1
 item_2/text = "Add Tag"
@@ -34,31 +33,31 @@ item_2/id = 2
 item_3/text = "Reset Size"
 item_3/id = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="body"]
+[node name="VBoxContainer" type="VBoxContainer" parent="body" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_right = 57
 
-[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer/MarginContainer" groups=["themegrp"]]
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="OptionsTab" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="OptionsTab" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "Options"
 
-[node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/MarginContainer/HBoxContainer" groups=["themegrp"]]
 visible = false
 clip_contents = true
 layout_mode = 2
@@ -67,17 +66,17 @@ size_flags_vertical = 4
 theme = ExtResource("2_7fpbl")
 text = "Move"
 
-[node name="Back" type="Button" parent="body/VBoxContainer/MarginContainer"]
+[node name="Back" type="Button" parent="body/VBoxContainer/MarginContainer" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 text = "Back"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 0
@@ -85,7 +84,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="ConnectTo" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="ConnectTo" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("2_7fpbl")
@@ -103,45 +102,47 @@ round_precision = 32
 antialiased = true
 script = ExtResource("2_a3hhb")
 
-[node name="TabContainer" type="TabContainer" parent="body/VBoxContainer/HBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="body/VBoxContainer/HBoxContainer" groups=["themegrp"]]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(320, 120)
 layout_mode = 2
+current_tab = 0
 clip_tabs = false
 tabs_visible = false
 all_tabs_in_front = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer" groups=["themegrp"]]
 custom_minimum_size = Vector2(240, 96)
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 0
+metadata/_tab_index = 0
 
-[node name="NoteContent" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer"]
+[node name="NoteContent" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
+[node name="PanelContainer" type="PanelContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("2_7fpbl")
 
-[node name="TextureRect" type="TextureRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="ImageTint" type="ColorRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
+[node name="ImageTint" type="ColorRect" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 color = Color(0, 0, 0, 0.588235)
 
-[node name="ImageText" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer"]
+[node name="ImageText" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/PanelContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
@@ -154,10 +155,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Text" type="TextEdit" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent"]
+[node name="Text" type="TextEdit" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent" groups=["themegrp"]]
+auto_translate_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
-auto_translate = false
 localize_numeral_system = false
 theme = ExtResource("2_7fpbl")
 context_menu_enabled = false
@@ -168,7 +169,7 @@ scroll_fit_content_height = true
 caret_blink = true
 caret_move_on_right_click = false
 
-[node name="Label" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text"]
+[node name="Label" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text" groups=["themegrp"]]
 self_modulate = Color(0.470076, 0.470076, 0.470076, 0.564706)
 layout_mode = 1
 anchors_preset = 15
@@ -182,130 +183,132 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Settings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
+[node name="Settings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 alignment = 1
+metadata/_tab_index = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="ImageText" type="LineEdit" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer"]
+[node name="ImageText" type="LineEdit" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("2_7fpbl")
 placeholder_text = "Title Text"
 
-[node name="ClearImageText" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer"]
+[node name="ClearImageText" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer" groups=["themegrp"]]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 text = "Clear"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="ImageTintButton" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+[node name="ImageTintButton" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "Tint"
 
-[node name="FontSizeSmaller" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+[node name="FontSizeSmaller" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2" groups=["themegrp"]]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 text = "-"
 
-[node name="CurrentFontSize" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+[node name="CurrentFontSize" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "  Font Size  "
 horizontal_alignment = 1
 
-[node name="FontSizeBigger" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+[node name="FontSizeBigger" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2" groups=["themegrp"]]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 text = "+"
 
-[node name="Label3" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2"]
+[node name="Label3" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="LoadImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3"]
+[node name="LoadImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "Load Image"
 
-[node name="RemoveImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3"]
+[node name="RemoveImage" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer3" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "Remove Image"
 
-[node name="fitin" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="fitin" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 text = "Enable Note Scrolling"
 
-[node name="ShowTags" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="ShowTags" type="CheckButton" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_7fpbl")
 text = "Display Tags"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="GoTagsSettingsButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4"]
+[node name="GoTagsSettingsButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "Change Tags"
 
-[node name="DefSizeButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4"]
+[node name="DefSizeButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_7fpbl")
 text = "Reset Note Size"
 
-[node name="Delete" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings"]
+[node name="Delete" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/Settings" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 10
 theme = ExtResource("2_7fpbl")
 text = "Delete Note"
 
-[node name="TagsSettings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer"]
+[node name="TagsSettings" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
-[node name="Label" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings"]
+[node name="Label" type="Label" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "All Tags"
 
-[node name="TagsProperts" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings"]
+[node name="TagsProperts" type="VBoxContainer" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings" groups=["themegrp"]]
 layout_mode = 2
 
-[node name="AddNewTagButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings"]
+[node name="AddNewTagButton" type="Button" parent="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 10
 text = "Add New Tag"
 
-[node name="MarginContainer2" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="body/VBoxContainer/HBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 0
@@ -313,14 +316,14 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="Add Note" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
+[node name="Add Note" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme = ExtResource("2_7fpbl")
 text = "+"
 
-[node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
+[node name="MoveNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -328,14 +331,14 @@ size_flags_vertical = 0
 theme = ExtResource("2_7fpbl")
 text = "Move"
 
-[node name="ResizeNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2"]
+[node name="ResizeNoteButton" type="Button" parent="body/VBoxContainer/HBoxContainer/MarginContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme = ExtResource("2_7fpbl")
 text = "Resize"
 
-[node name="TextBasedMargin" type="MarginContainer" parent="body/VBoxContainer"]
+[node name="TextBasedMargin" type="MarginContainer" parent="body/VBoxContainer" groups=["themegrp"]]
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 mouse_filter = 2
@@ -344,22 +347,25 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 57
 theme_override_constants/margin_bottom = 0
 
-[node name="Panel" type="Panel" parent="body/VBoxContainer/TextBasedMargin"]
+[node name="Panel" type="Panel" parent="body/VBoxContainer/TextBasedMargin" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2_7fpbl")
 
-[node name="TagsContainer" type="MarginContainer" parent="body/VBoxContainer/TextBasedMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="body/VBoxContainer/TextBasedMargin"]
+layout_mode = 2
+
+[node name="TagsContainer" type="MarginContainer" parent="body/VBoxContainer/TextBasedMargin/VBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2_7fpbl")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 script = ExtResource("3_5ph0w")
 
-[node name="TagsClick" type="Button" parent="body/VBoxContainer/TextBasedMargin/TagsContainer"]
+[node name="TagsClick" type="Button" parent="body/VBoxContainer/TextBasedMargin/VBoxContainer/TagsContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 focus_mode = 0
@@ -367,11 +373,15 @@ theme = ExtResource("2_7fpbl")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 
-[node name="HFlowContainer" type="FlowContainer" parent="body/VBoxContainer/TextBasedMargin/TagsContainer"]
+[node name="HFlowContainer" type="FlowContainer" parent="body/VBoxContainer/TextBasedMargin/VBoxContainer/TagsContainer" groups=["themegrp"]]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
+
+[node name="AddToParent" type="Button" parent="body/VBoxContainer/TextBasedMargin/VBoxContainer"]
+layout_mode = 2
+text = "└+"
 
 [node name="LightUp" type="ColorRect" parent="body"]
 self_modulate = Color(1, 1, 1, 0)
@@ -385,19 +395,19 @@ title = "Open a File"
 initial_position = 2
 size = Vector2i(600, 400)
 popup_window = true
-ok_button_text = "Открыть"
+ok_button_text = "Open"
 dialog_hide_on_ok = true
 cancel_button_text = "Убрать каритнку"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")
+filters = PackedStringArray("*.png,*.jpeg,*.jpg", "*.png", "*.jpg", "*.jpeg")
 use_native_dialog = true
 
 [node name="AddTagDialog" type="ConfirmationDialog" parent="."]
 title = "Add New Tag"
 initial_position = 2
 
-[node name="TagDialogText" type="LineEdit" parent="AddTagDialog"]
+[node name="TagDialogText" type="LineEdit" parent="AddTagDialog" groups=["themegrp"]]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 192.0
@@ -429,12 +439,14 @@ placeholder_text = "Enter Tag"
 [connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer4/DefSizeButton" to="." method="_on_def_size_button_pressed"]
 [connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/Settings/Delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings/AddNewTagButton" to="." method="_on_add_new_tag_button_pressed"]
-[connection signal="pressed" from="body/VBoxContainer/HBoxContainer/MarginContainer2/Add Note" to="." method="_on_add_note_pressed"]
+[connection signal="button_down" from="body/VBoxContainer/HBoxContainer/MarginContainer2/Add Note" to="." method="_on_add_note_button_down"]
+[connection signal="button_up" from="body/VBoxContainer/HBoxContainer/MarginContainer2/Add Note" to="." method="_on_add_note_button_up"]
 [connection signal="button_down" from="body/VBoxContainer/HBoxContainer/MarginContainer2/MoveNoteButton" to="." method="_on_move_note_button_button_down"]
 [connection signal="button_up" from="body/VBoxContainer/HBoxContainer/MarginContainer2/MoveNoteButton" to="." method="_on_move_note_button_button_up"]
 [connection signal="button_down" from="body/VBoxContainer/HBoxContainer/MarginContainer2/ResizeNoteButton" to="." method="_on_resize_note_button_button_down"]
 [connection signal="button_up" from="body/VBoxContainer/HBoxContainer/MarginContainer2/ResizeNoteButton" to="." method="_on_resize_note_button_button_up"]
-[connection signal="pressed" from="body/VBoxContainer/TextBasedMargin/TagsContainer/TagsClick" to="." method="_on_tags_click_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/TextBasedMargin/VBoxContainer/TagsContainer/TagsClick" to="." method="_on_tags_click_pressed"]
+[connection signal="pressed" from="body/VBoxContainer/TextBasedMargin/VBoxContainer/AddToParent" to="." method="_on_add_to_parent_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="canceled" from="AddTagDialog" to="." method="_on_add_tag_dialog_canceled"]
 [connection signal="confirmed" from="AddTagDialog" to="." method="_on_add_tag_dialog_confirmed"]

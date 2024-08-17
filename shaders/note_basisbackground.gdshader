@@ -16,7 +16,7 @@ uniform vec2 scale = vec2( 2.0, 16.0 );
 
 void fragment( )
 {
-	vec2 uv = (UV * scale+vec2(cmpos.x*(scale.x*0.0005),cmpos.y*(scale.y*0.0005)))/(multplr*0.25+0.9);// /(1.05-multplr*0.25) 
+	vec2 uv = (UV * scale+vec2(cmpos.x*(scale.x*0.0003),cmpos.y*(scale.y*0.0005)))/(multplr*0.25+0.9);// /(1.05-multplr*0.25) 
 	float shift = cos( floor( uv.y ) );
 	uv.x += shift;
 	//uv.y += ;

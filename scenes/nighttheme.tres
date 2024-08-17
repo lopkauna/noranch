@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://bqbxy1tondj6l"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://bhpvo6idgtjbu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcy02"]
 content_margin_left = 4.0
@@ -150,7 +150,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slav8"]
-bg_color = Color(0.133, 0.133, 0.133, 0.635)
+bg_color = Color(0.133333, 0.133333, 0.133333, 0.635294)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -182,26 +182,17 @@ corner_radius_bottom_left = 4
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_pcy02")
 Button/styles/focus = SubResource("StyleBoxFlat_hhm4n")
 Button/styles/hover = SubResource("StyleBoxFlat_iru0l")
 Button/styles/normal = SubResource("StyleBoxFlat_mh8sy")
 Button/styles/pressed = SubResource("StyleBoxFlat_vuc8e")
-CheckButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-CheckButton/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-CheckButton/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-CheckButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-CheckButton/colors/font_pressed_color = Color(1, 1, 1, 1)
 CheckButton/styles/disabled = SubResource("StyleBoxFlat_f8tt5")
 CheckButton/styles/focus = SubResource("StyleBoxFlat_75qo0")
 CheckButton/styles/hover = SubResource("StyleBoxFlat_fndvn")
 CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_mu4sh")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_u6oth")
 CheckButton/styles/pressed = SubResource("StyleBoxFlat_ix5l8")
-Label/colors/font_color = Color(1, 1, 1, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_slav8")
 TextEdit/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 TextEdit/colors/font_placeholder_color = Color(0.875, 0.875, 0.875, 0.6)

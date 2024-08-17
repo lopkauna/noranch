@@ -1,5 +1,6 @@
 extends Node2D
 
+const current_user_theme_path = "user://curtheme.nrchthem"
 @onready var note_basis = $"../.."
 @onready var camera_2d = $"../../Camera2D"
 
@@ -20,10 +21,12 @@ extends Node2D
 @onready var back_button = $body/VBoxContainer/MarginContainer/Back
 
 @onready var resize_note_button = $body/VBoxContainer/HBoxContainer/MarginContainer2/ResizeNoteButton
+@onready var panel = $body/VBoxContainer/TextBasedMargin/Panel
 
 
 @onready var connect_to = $body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo
 @onready var add_note = $"body/VBoxContainer/HBoxContainer/MarginContainer2/Add Note"
+@onready var add_to_parent: Button = $body/VBoxContainer/TextBasedMargin/VBoxContainer/AddToParent
 @onready var line_2d = $body/VBoxContainer/HBoxContainer/MarginContainer/ConnectTo/Line2D
 @onready var popup_menu = $body/PopupMenu
 @onready var current_font_size = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/CurrentFontSize
@@ -31,13 +34,13 @@ extends Node2D
 @onready var image_tint_button = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/HBoxContainer2/ImageTintButton
 @onready var label = $body/VBoxContainer/HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text/Label
 @onready var light_up = $body/LightUp
-@onready var h_flow_container = $body/VBoxContainer/TextBasedMargin/TagsContainer/HFlowContainer
+@onready var h_flow_container: FlowContainer = $body/VBoxContainer/TextBasedMargin/VBoxContainer/TagsContainer/HFlowContainer
 @onready var add_new_tag_button = $body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings/AddNewTagButton
 @onready var add_tag_dialog = $AddTagDialog
 @onready var add_tag_dialog_text = $AddTagDialog/TagDialogText
 @onready var tags_properts = $body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings/TagsProperts
 @onready var show_tags = $body/VBoxContainer/HBoxContainer/TabContainer/Settings/ShowTags
-@onready var tags_container = $body/VBoxContainer/TextBasedMargin/TagsContainer
+@onready var tags_container: MarginContainer = $body/VBoxContainer/TextBasedMargin/VBoxContainer/TagsContainer
 @onready var tags_settings = $body/VBoxContainer/HBoxContainer/TabContainer/TagsSettings
 @onready var settings_tab = $body/VBoxContainer/HBoxContainer/TabContainer/Settings
 @onready var text_based_margin = $body/VBoxContainer/TextBasedMargin
@@ -55,6 +58,7 @@ var islightup = false
 var isrsng = false
 var rsoffset = Vector2(0,0)
 
+
 var ismvng = false
 var mvoffset = Vector2(0,0)
 var oldname = ""
@@ -63,9 +67,16 @@ var tags_array : Array = []
 var temp_tags_array : Array = []
 var tagsisvisbl = true
 
+var tocreatetm = 0
+var addpressed = false
+var blanknote = null
+
 var cursize = Vector2(0,0)
 
+var curcolordic := {}
 func _ready():
+	#for chlds in get_tree().get_nodes_in_group("themegrp"):
+	#	apply_thm_override(chlds)
 	#tagsisvisbl = text_based_margin.visible
 	tab_container.self_modulate.a = 0
 	light_up.global_position = tab_container.get_global_rect().position - Vector2(4,4)
@@ -74,6 +85,50 @@ func _ready():
 	image_tint_button.button_pressed = image_tint.visible
 	
 	
+
+func apply_thm_override(node):
+	if FileAccess.file_exists(current_user_theme_path):
+		var file = FileAccess.open(current_user_theme_path,FileAccess.READ)
+		var tempthmdic = file.get_var(true) as Dictionary
+		#if not tempthmdic.is_empty():
+		curcolordic = tempthmdic
+	else:
+		curcolordic = Gset.colorblackdic
+	if node is Button or CheckButton:
+		node.add_theme_color_override("font_color",curcolordic["buttontxtcol"])
+		node.add_theme_color_override("font_hover_color",curcolordic["buttonhowtxtcol"])
+		node.add_theme_color_override("font_hover_pressed_color",curcolordic["buttonprstxtcol"])
+		node.add_theme_color_override("font_pressed_color",curcolordic["buttonprstxtcol"])
+		node.add_theme_color_override("font_disabled_color",Color(0.875,0.875,0.875,0.5))
+		var nrmstlb = node.get_theme_stylebox("normal").duplicate()
+		nrmstlb.set("bg_color", curcolordic["buttonbgcol"])
+		nrmstlb.set("border_color", curcolordic["buttonoutlncol"])
+		node.add_theme_stylebox_override("normal", nrmstlb)
+		var howstlb = node.get_theme_stylebox("hover").duplicate()
+		howstlb.set("bg_color", curcolordic["buttonhowbgcol"])
+		howstlb.set("border_color", curcolordic["buttonhowoutlncol"])
+		node.add_theme_stylebox_override("hover", howstlb)
+		var prsstlb = node.get_theme_stylebox("pressed").duplicate()
+		prsstlb.set("bg_color", curcolordic["buttonprsbgcol"])
+		prsstlb.set("border_color", curcolordic["buttonprsoutlncol"])
+		node.add_theme_stylebox_override("pressed", prsstlb)
+	elif node is Label:
+		node.add_theme_color_override("font_color",curcolordic["deftextcol"])
+	elif node is Panel:
+		var panstlb = node.get_theme_stylebox("panel").duplicate()
+		panstlb.set("bg_color", curcolordic["notebgcol"])
+		panstlb.set("border_color", curcolordic["noteoutlinecol"])
+		node.add_theme_stylebox_override("panel", panstlb)
+	elif node is TextEdit:
+		node.add_theme_color_override("font_color",curcolordic["texteditdeftextcol"])
+		node.add_theme_color_override("font_placeholder_color",curcolordic["texteditplhldrtextcol"])
+		var tedstlb = node.get_theme_stylebox("normal").duplicate()
+		tedstlb.set("bg_color", curcolordic["texteditbgcol"])
+		tedstlb.set("border_color", curcolordic["texteditoutlinecol"])
+		node.add_theme_stylebox_override("normal", tedstlb)
+	elif node is Line2D:
+		node.default_color = curcolordic["lineconcol"]
+
 
 func _process(delta):
 	if camera_2d.global_position.distance_to(global_position + Vector2(tab_container.get_global_rect().size.x*0.5+22,tab_container.get_global_rect().size.y*0.5+4)) > (get_viewport_rect().size.x + get_viewport_rect().size.y) * (1.35-camera_2d.zoom.x*0.25):
@@ -85,19 +140,36 @@ func _process(delta):
 		line_2d.set_process(true)
 		tags_container.set_process(true)
 		show()
+	
 	tags_settings.custom_minimum_size.y = scroll_container.size.y
 	settings_tab.custom_minimum_size.y = scroll_container.size.y
 	if add_tag_dialog.visible == true:
 		note_basis.isnotedialog = true
-	
+		if Input.is_action_just_pressed("ui_accept"):
+			_on_add_tag_dialog_confirmed()
+			add_tag_dialog.visible = false
+		if Input.is_action_just_pressed("ui_cancel"):
+			_on_add_tag_dialog_canceled()
+	if addpressed == true and Time.get_ticks_msec()-tocreatetm>=300:
+		if blanknote == null:
+			create_blank_note()
+		if blanknote != null:
+			blanknote.global_position = get_global_mouse_position()
+	if text.has_focus():
+		note_basis.isnotedialog = true
 	match tab_container.current_tab:
 		0:
-			#print(text.get_focus_owner())
 			if text.has_focus():
 				if Input.is_action_just_pressed("ui_cancel"):
 					text.release_focus()
 				if Input.is_action_just_pressed("crnextnoteshrtcut"):
-					create_next_note()
+					create_next_note(true)
+				if Input.is_action_just_pressed("crnotetoparrentshrtcut") and line_2d.targetnode != null:
+					line_2d.targetnode.create_next_note_withcords(global_position+Vector2(0,40+self.get_tab_rect().size.y),true)
+				if Input.is_action_just_pressed("delnoteshrtcut"):
+					text.release_focus()
+					note_basis.isnotedialog = false
+					queue_free()
 			if temp_tags_array != tags_array:
 				tags_array.clear()
 				tags_array.append_array(temp_tags_array)
@@ -127,19 +199,22 @@ func _process(delta):
 	current_font_size.text = "Title Size = " + str(image_text.get_theme_font_size("font_size"))
 	if is_connecting_to == true:
 		note_basis.somenotehovered = true
+		note_basis.lastfocusednote = self
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
 			Gset.curnotehold = null
 			is_connecting_to = false
 			
 	if isrsng == true:
 		note_basis.somenotehovered = true
-		vsbl = 0
+		note_basis.lastfocusednote = self
+		vsbl = 0.1
 		tab_container.custom_minimum_size.x = clampf(get_global_mouse_position().x - tab_container.global_position.x + rsoffset.x,160,4000)#) - tab_container.global_position
 		tab_container.custom_minimum_size.y = clampf(get_global_mouse_position().y - tab_container.global_position.y + rsoffset.y,92,2000)#) - tab_container.global_position
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
 			isrsng = false
 	if ismvng == true:
 		note_basis.somenotehovered = true
+		note_basis.lastfocusednote = self
 		self.global_position = get_global_mouse_position() + mvoffset
 		if not (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5):
 			ismvng = false
@@ -156,12 +231,14 @@ func _process(delta):
 		image_tint_button.self_modulate.a = 1
 		scroll_container.custom_minimum_size.y = texture_rect.get_global_rect().size.y
 		remove_image.visible = true
-	vsbl = move_toward(vsbl,0,delta*10)
-	deltreshold = move_toward(deltreshold,0,delta*10)
+	if get_global_mouse_position().x == clampf(get_global_mouse_position().x,body.get_global_rect().position.x,body.get_global_rect().end.x):#get_global_rect().position.x <= get_global_mouse_position().x and get_global_rect().end.x >= get_global_mouse_position().x:
+		if get_global_mouse_position().y == clampf(get_global_mouse_position().y,body.get_global_rect().position.y,body.get_global_rect().end.y):#get_global_rect().position.y <= get_global_mouse_position().y and get_global_rect().end.y >= get_global_mouse_position().y:
+			vsbl = 0.1
 	if vsbl <= 0:
 		if is_connecting_to == false:
 			connect_to.self_modulate.a = 0
 		add_note.modulate.a = 0
+		add_to_parent.modulate.a = 0
 		resize_note_button.modulate.a = 0
 		move_note_button.visible = false
 		options_tab.visible = false
@@ -180,6 +257,7 @@ func _process(delta):
 		else:
 			if text.text.strip_edges(true,true) == "":
 				text.modulate.a = 0
+				tab_container.custom_minimum_size.y = 96
 			else:
 				text.modulate.a = 1
 		if Gset.curnotehold != null:
@@ -193,6 +271,7 @@ func _process(delta):
 		#text.visible = true
 		text_based_margin.modulate.a = 1
 		note_basis.somenotehovered = true
+		note_basis.lastfocusednote = self
 		islightup = false
 		if Gset.curnotehold != null:
 			if (Input.get_mouse_button_mask() == 1 or Input.get_mouse_button_mask() == 5) and Gset.curnotehold != line_2d:
@@ -204,13 +283,15 @@ func _process(delta):
 		else:
 			if Input.get_mouse_button_mask() == 2:
 				popup_menu.popup(Rect2(get_viewport().get_mouse_position().x,get_viewport().get_mouse_position().y,popup_menu.size.x,popup_menu.size.y))
-			if Input.is_action_just_pressed("movenotes"):
-				if deltreshold > 0:
-					self.queue_free()
-				else:
-					deltreshold = 0.284
+			#if Input.is_action_just_pressed("movenotes"):
+			#	if deltreshold > 0:
+			#		self.queue_free()
+			#	else:
+			#		deltreshold = 0.284
 			connect_to.self_modulate.a = 1
 			add_note.modulate.a = 1
+			if line_2d.targetnode != null:
+				add_to_parent.modulate.a = 1
 			resize_note_button.modulate.a = 1
 			if tab_container.current_tab == 0:
 				move_note_button.visible = true
@@ -223,9 +304,9 @@ func _process(delta):
 			if scrlison == true:
 				scroll_container.vertical_scroll_mode = 1
 				note_basis.canzoom = false
-	if get_global_mouse_position().x == clampf(get_global_mouse_position().x,body.get_global_rect().position.x,body.get_global_rect().end.x):#get_global_rect().position.x <= get_global_mouse_position().x and get_global_rect().end.x >= get_global_mouse_position().x:
-		if get_global_mouse_position().y == clampf(get_global_mouse_position().y,body.get_global_rect().position.y,body.get_global_rect().end.y):#get_global_rect().position.y <= get_global_mouse_position().y and get_global_rect().end.y >= get_global_mouse_position().y:
-			vsbl = 0.1
+	
+	vsbl = move_toward(vsbl,0,delta*10)
+	deltreshold = move_toward(deltreshold,0,delta*10)
 	if scrlison == false:
 		scroll_container.vertical_scroll_mode = 0
 	
@@ -274,19 +355,33 @@ func _on_clear_image_text_pressed():
 func _on_move_note_button_button_down():
 	ismvng = true
 	mvoffset = self.global_position - get_global_mouse_position()
+	if not note_basis.selectionarr.is_empty():
+		for nts in note_basis.selectionarr:
+			if nts != self:
+				nts.ismvng = true
+				nts.mvoffset = nts.global_position - get_global_mouse_position()
 
 
 func _on_move_note_button_button_up():
 	ismvng = false
+	if not note_basis.selectionarr.is_empty():
+		for nts in note_basis.selectionarr:
+			if nts != self:
+				nts.ismvng = false
 
+#func istextfocused():
+#	var pit : TextEdit
+#	pit.release_focus()
 
 func _on_text_focus_entered():
-	note_basis.isnotedialog = true
+	pass
+	#note_basis.isnotedialog = true
 	#note_basis.canmov = false
 
 
 func _on_text_focus_exited():
-	note_basis.isnotedialog = false
+	pass
+	#note_basis.isnotedialog = false
 	#note_basis.canmov = true
 
 
@@ -310,6 +405,7 @@ func _on_popup_menu_index_pressed(index):
 		2:
 			note_basis.isnotedialog = true
 			add_tag_dialog.popup()
+			add_tag_dialog_text.grab_focus()
 		3:
 			tab_container.custom_minimum_size = Vector2(320,120)
 
@@ -343,17 +439,40 @@ func get_note_center_pos():
 	var centpos = global_position + Vector2(tab_container.get_global_rect().size.x*0.5+22,tab_container.get_global_rect().size.y*0.5+4)
 	return centpos
 
-func _on_add_note_pressed():
-	create_next_note()
+func get_body_rect():
+	return tab_container.get_global_rect()
 
-func create_next_note():
+func create_next_note(centrcam : bool):
 	var nres = load("res://scenes/note.tscn")
 	var nnote = nres.instantiate()
 	nnote.global_position = global_position + Vector2(tab_container.get_global_rect().size.x+40,tab_container.get_global_rect().size.y*0.5-60)
 	get_parent().add_child(nnote)
 	nnote.pass_targetnode(self)
 	nnote.text.grab_focus()
-	note_basis.repos_cam(nnote.global_position + Vector2(160,64))
+	if centrcam == true:
+		note_basis.repos_cam(nnote.global_position + Vector2(160,64))
+	add_note.button_mask = 1
+
+func create_next_note_withcords(ncords:Vector2,centrcam : bool):
+	var nres = load("res://scenes/note.tscn")
+	var nnote = nres.instantiate()
+	nnote.global_position = ncords#global_position + Vector2(tab_container.get_global_rect().size.x+40,tab_container.get_global_rect().size.y*0.5-60)
+	get_parent().add_child(nnote)
+	nnote.pass_targetnode(self)
+	nnote.text.grab_focus()
+	if centrcam == true:
+		note_basis.repos_cam(nnote.global_position + Vector2(160,64))
+	add_note.button_mask = 1
+	if blanknote != null:
+		blanknote.queue_free()
+
+func create_blank_note():
+	var nres = load("res://scenes/note.tscn")
+	var nnote = nres.instantiate()
+	#nnote.global_position = ncords#global_position + Vector2(tab_container.get_global_rect().size.x+40,tab_container.get_global_rect().size.y*0.5-60)
+	get_parent().add_child(nnote)
+	nnote.pass_targetnode(self)
+	blanknote = nnote
 
 func _on_options_tab_pressed():
 	tab_container.current_tab = 1
@@ -478,10 +597,14 @@ func _on_tab_container_tab_changed(tab):
 			update_tags_optionlist()
 
 func check_tag(tagname):
-	if tags_array.has(tagname):
-		return self
-	else:
-		return null
+	#var matches := 0
+	for wrds in tags_array.size():
+		if tags_array[wrds].contains(tagname):
+			return self
+	#if tags_array.has(tagname):
+	#	return self
+	#else:
+	return null
 
 
 func _on_add_tag_dialog_canceled():
@@ -499,3 +622,26 @@ func _on_go_tags_settings_button_pressed():
 func _on_add_new_tag_button_pressed():
 	note_basis.isnotedialog = true
 	add_tag_dialog.popup()
+
+#func _on_add_note_pressed():
+#	add_note.button_mask = 0
+#	create_next_note()
+
+func _on_add_note_button_down():
+	tocreatetm = Time.get_ticks_msec()
+	addpressed = true
+
+func _on_add_note_button_up():
+	addpressed = false
+	if Time.get_ticks_msec()-tocreatetm<300:
+		add_note.button_mask = 0
+		create_next_note(true)
+	else:
+		add_note.button_mask = 0
+		create_next_note_withcords(get_global_mouse_position(),false)
+
+
+func _on_add_to_parent_pressed() -> void:
+	if line_2d.targetnode != null:
+		line_2d.targetnode.create_next_note_withcords(global_position+Vector2(0,40+self.get_tab_rect().size.y),true)
+		

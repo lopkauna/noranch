@@ -1,7 +1,7 @@
 extends Line2D
 
-@onready var decoy_text_edit = $"../VBoxContainer/ThemePreview/FlowContainer/DecoyTextEdit"
-@onready var decoy_button = $"../VBoxContainer/ThemePreview/FlowContainer/DecoyButton"
+@onready var decoy_text_edit = $"../VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer/DecoyTextEdit"
+@onready var decoy_button = $"../VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer/DecoyButton"
 
 @onready var curve = Curve2D.new()
 

@@ -26,7 +26,7 @@ script = ExtResource("1_qh4ox")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" groups=["themegrp"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control" groups=["themegrp"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,291 +43,298 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 2
 
-[node name="Main Menu" type="Button" parent="CanvasLayer/Control/VBoxContainer2/HBoxContainer"]
+[node name="Main Menu" type="Button" parent="CanvasLayer/Control/VBoxContainer2/HBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 text = "Main Menu"
 
-[node name="StyleTabContainer" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2"]
+[node name="StyleTabContainer" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vj3i6")
+current_tab = 0
 tabs_visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
+metadata/_tab_index = 0
 
-[node name="TabControl" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer"]
+[node name="TabControl" type="TabContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+current_tab = 0
 tabs_visible = false
 use_hidden_tabs_for_min_size = true
 
-[node name="MainMenu" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
+[node name="MainMenu" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl" groups=["themegrp"]]
 custom_minimum_size = Vector2(320, 80)
 layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu" groups=["themegrp"]]
 layout_mode = 2
 text = "Main Menu Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoToInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
+[node name="GoToInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu" groups=["themegrp"]]
 layout_mode = 2
 text = "Interface"
 
-[node name="GoToBinding" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
+[node name="GoToBinding" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu" groups=["themegrp"]]
 layout_mode = 2
 text = "Binds"
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GoToCredits" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu/MarginContainer"]
+[node name="GoToCredits" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/MainMenu/MarginContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Credits"
 
-[node name="Interface" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
+[node name="Interface" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl" groups=["themegrp"]]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 layout_mode = 2
 text = "Interface Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 layout_mode = 2
 text = "Go Back"
 
-[node name="AnimatedBackground" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="AnimatedBackground" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Use Animated Background  "
+text = "Use Shaders for Background  "
 
-[node name="UseGridForNotes" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="UseGridForNotes" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Use Grid"
 
-[node name="UseBuildInFileSystem" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="UseBuildInFileSystem" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Use Build In File System"
 
-[node name="ResetInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="ResetInterface" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 layout_mode = 2
 text = "Reset Interface"
 
-[node name="ThemeChooseLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="ThemeChooseLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_n1yei")
 text = "Chose Theme"
 horizontal_alignment = 1
 
-[node name="ThemeChooseButton" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="ThemeChooseButton" type="OptionButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 visible = false
 layout_mode = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Dark Theme"
-popup/item_0/id = 0
 popup/item_1/text = "Light Theme"
 popup/item_1/id = 1
+popup/item_1/disabled = true
 popup/item_2/text = "Custom Theme"
 popup/item_2/id = 2
 
-[node name="OpenUserThemeSettings" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface"]
+[node name="OpenUserThemeSettings" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Interface" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 text = "Set Custom Theme Colors"
 
-[node name="Binds" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
+[node name="Binds" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 alignment = 1
+metadata/_tab_index = 2
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 text = "Binding Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 text = "Go Back"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="MoveNotesLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer"]
+[node name="MoveNotesLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Notes"
 
-[node name="MoveNotesButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer"]
+[node name="MoveNotesButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "movenotes"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="ZoomInLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer2"]
+[node name="ZoomInLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer2" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zoom In"
 
-[node name="ZoomInButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer2"]
+[node name="ZoomInButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer2" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "zoomin"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="ZoomOutLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer3"]
+[node name="ZoomOutLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer3" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zoom Out"
 
-[node name="ZoomOutButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer3"]
+[node name="ZoomOutButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer3" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "zoomout"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="ZoomDefLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer4"]
+[node name="ZoomDefLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer4" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Default Zoom"
 
-[node name="ZoomDefButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer4"]
+[node name="ZoomDefButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer4" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "defzoom"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="UpLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer5"]
+[node name="UpLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer5" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Up"
 
-[node name="UpButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer5"]
+[node name="UpButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer5" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "up"
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="DownLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer6"]
+[node name="DownLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer6" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Down"
 
-[node name="DownButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer6"]
+[node name="DownButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer6" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "down"
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="LeftLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer7"]
+[node name="LeftLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer7" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Left"
 
-[node name="LeftButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer7"]
+[node name="LeftButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer7" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "left"
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer8" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="RightLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer8"]
+[node name="RightLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer8" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Move Right"
 
-[node name="RightButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer8"]
+[node name="RightButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer8" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "right"
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 layout_mode = 2
 alignment = 2
 
-[node name="FastMoveLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer9"]
+[node name="FastMoveLabelBind" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer9" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Faster Movement"
 
-[node name="FastMoveButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer9"]
+[node name="FastMoveButtonBind" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/HBoxContainer9" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("2_ctgt5")
 action = "fastmv"
 
-[node name="ResetBindsButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds"]
+[node name="ResetBindsButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds" groups=["themegrp"]]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 text = "Reset all binds"
 
-[node name="Credits" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl"]
+[node name="Credits" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl" groups=["themegrp"]]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits" groups=["themegrp"]]
 layout_mode = 2
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits"]
+[node name="GoBack" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits" groups=["themegrp"]]
 layout_mode = 2
 text = "Go Back"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -343,151 +350,507 @@ Settings Menu Shader:
 GodotCallThrottled[plugin]:
 [url]https://github.com/ImmersiveRPG/GodotCallThrottled/tree/master[/url]"
 
-[node name="StyleExampleContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer"]
+[node name="StyleExampleContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer" groups=["themegrp"]]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
+metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer" groups=["themegrp"]]
 layout_mode = 2
 
-[node name="ThemePreview" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer"]
+[node name="ThemePreview" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer" groups=["themegrp"]]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_constants/separation = 100
 
-[node name="ColorPickersList" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 4
+
+[node name="ThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "
+Chose Your Theme Colors
+
+
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer" groups=["themegrp"]]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="NoteBodyColorPickersList" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
 theme = ExtResource("2_yp0qm")
 
-[node name="ThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="PanelThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_yp0qm")
+text = "Note Body Colors"
+
+[node name="DefaultNoteBgColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultNoteBgColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Background Color"
+
+[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultNoteBgColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.133, 0.133, 0.133, 0.635)
+
+[node name="NoteBGOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelHoweredMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/NoteBGOutlineColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Outline Color"
+
+[node name="PickerHoweredMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/NoteBGOutlineColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.052, 0.052, 0.052, 1)
+
+[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultTextColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Default Text Color"
+
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultTextColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 1)
+
+[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelLineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/LineColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Line Color"
+
+[node name="PickerLineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/LineColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 0.565)
+
+[node name="TextEditThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_yp0qm")
+text = "TextEdit Colors"
+
+[node name="DefaultNoteBgColor2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultNoteBgColor2" groups=["themegrp"]]
+layout_mode = 2
+text = "Background Color"
+
+[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultNoteBgColor2" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.133, 0.133, 0.133, 0.635)
+
+[node name="NoteBGOutlineColor2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelHoweredMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/NoteBGOutlineColor2" groups=["themegrp"]]
+layout_mode = 2
+text = "Outline Color"
+
+[node name="PickerHoweredMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/NoteBGOutlineColor2" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.051, 0.051, 0.051, 1)
+
+[node name="DefaultTextColor2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultTextColor2" groups=["themegrp"]]
+layout_mode = 2
+text = "Default Text Color"
+
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultTextColor2" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 1)
+
+[node name="PlaceholderTextColor3" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/PlaceholderTextColor3" groups=["themegrp"]]
+layout_mode = 2
+text = "Placeholder Text Color"
+
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/PlaceholderTextColor3" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 0.6)
+
+[node name="ButtonColorPickersList2" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme = ExtResource("2_yp0qm")
+
+[node name="ThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_yp0qm")
+text = "Button Theme Colors"
+
+[node name="DefaultMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultMateColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Default Mate Color"
+
+[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultMateColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="DefaultOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultOutlineColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Default Outline Color"
+
+[node name="PickerDefaultOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultOutlineColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.051, 0.051, 0.051, 1)
+
+[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultTextColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Button Text Color"
+
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultTextColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 1)
+
+[node name="HoweredMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelHoweredMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredMateColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Howered Mate Color"
+
+[node name="PickerHoweredMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredMateColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.198, 0.198, 0.198, 1)
+
+[node name="HoweredOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelHoweredOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredOutlineColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Howered Outline Color"
+
+[node name="PickerHoweredOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredOutlineColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="HoweredTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredTextColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Howered Text Color"
+
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredTextColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 1)
+
+[node name="InUseMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelInUseMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseMateColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Pressed Mate Color"
+
+[node name="PickerInUseMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseMateColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.085, 0.085, 0.085, 1)
+
+[node name="InUseOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelInUseOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseOutlineColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Pressed Outline Color"
+
+[node name="PickerInUseOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseOutlineColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(1, 1, 1, 0)
+
+[node name="InUseTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelInactiveTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseTextColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Pressed Text Color"
+
+[node name="PickerInactiveTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseTextColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 1)
+
+[node name="DisabledMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DisabledMateColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Disabled Mate Color"
+
+[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DisabledMateColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="DisabledOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelDefaultOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DisabledOutlineColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Disabled Outline Color"
+
+[node name="PickerDefaultOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DisabledOutlineColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="DisabledTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2" groups=["themegrp"]]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="LabelInactiveTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DisabledTextColor" groups=["themegrp"]]
+layout_mode = 2
+text = "Disabled Text Color"
+
+[node name="PickerInactiveTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DisabledTextColor" groups=["themegrp"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+color = Color(0.875, 0.875, 0.875, 0.5)
+
+[node name="ColorPickersList3" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer" groups=["themegrp"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 6
+theme = ExtResource("2_yp0qm")
+
+[node name="ThemeColorsTitle" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_yp0qm")
 text = "Chose Your Theme Colors"
 
-[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="DefaultTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultTextColor"]
+[node name="LabelDefaultTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/DefaultTextColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Default Text Color"
 
-[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultTextColor"]
+[node name="PickerDefaultTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/DefaultTextColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.875, 0.875, 0.875, 1)
 
-[node name="InactiveTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="InactiveTextColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelInactiveTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InactiveTextColor"]
+[node name="LabelInactiveTextColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/InactiveTextColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Inactive Text Color"
 
-[node name="PickerInactiveTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InactiveTextColor"]
+[node name="PickerInactiveTextColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/InactiveTextColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.875, 0.875, 0.875, 0.6)
 
-[node name="DefaultMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="DefaultMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultMateColor"]
+[node name="LabelDefaultMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/DefaultMateColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Default Mate Color"
 
-[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultMateColor"]
+[node name="PickerDefaultMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/DefaultMateColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.133333, 0.133333, 0.133333, 1)
 
-[node name="HoweredMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="HoweredMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelHoweredMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredMateColor"]
+[node name="LabelHoweredMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/HoweredMateColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Howered Mate Color"
 
-[node name="PickerHoweredMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredMateColor"]
+[node name="PickerHoweredMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/HoweredMateColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.198, 0.198, 0.198, 1)
 
-[node name="InUseMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="InUseMateColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelInUseMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InUseMateColor"]
+[node name="LabelInUseMateColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/InUseMateColor" groups=["themegrp"]]
 layout_mode = 2
 text = "In Use Mate Color"
 
-[node name="PickerInUseMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/InUseMateColor"]
+[node name="PickerInUseMateColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/InUseMateColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.085, 0.085, 0.085, 1)
 
-[node name="DefaultOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="DefaultOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelDefaultOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultOutlineColor"]
+[node name="LabelDefaultOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/DefaultOutlineColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Default Outline Color"
 
-[node name="PickerDefaultOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/DefaultOutlineColor"]
+[node name="PickerDefaultOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/DefaultOutlineColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.051, 0.051, 0.051, 1)
 
-[node name="HoweredOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="HoweredOutlineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelHoweredOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredOutlineColor"]
+[node name="LabelHoweredOutlineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/HoweredOutlineColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Howered Outline Color"
 
-[node name="PickerHoweredOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/HoweredOutlineColor"]
+[node name="PickerHoweredOutlineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/HoweredOutlineColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(0.8, 0.8, 0.8, 1)
 
-[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList"]
+[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 
-[node name="LabelLineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/LineColor"]
+[node name="LabelLineColor" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/LineColor" groups=["themegrp"]]
 layout_mode = 2
 text = "Line Color"
 
-[node name="PickerLineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/ColorPickersList/LineColor"]
+[node name="PickerLineColor" type="ColorPickerButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ColorPickersList3/LineColor" groups=["themegrp"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-color = Color(1, 1, 1, 1)
+color = Color(1, 1, 1, 0.565)
 
-[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 2
+theme_override_constants/margin_left = 80
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="DecoyLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer" groups=["themegrp"]]
+layout_mode = 2
+theme = ExtResource("2_yp0qm")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer" groups=["themegrp"]]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer" groups=["themegrp"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_yp0qm")
+
+[node name="DecoyLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
@@ -495,7 +858,7 @@ theme = ExtResource("2_yp0qm")
 text = "Colors Preview"
 horizontal_alignment = 1
 
-[node name="DecoyTextEdit" type="TextEdit" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+[node name="DecoyTextEdit" type="TextEdit" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer" groups=["themegrp"]]
 custom_minimum_size = Vector2(200, 64)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -506,36 +869,45 @@ context_menu_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 
-[node name="DecoyCheckButton" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+[node name="DecoyCheckButton" type="CheckButton" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer" groups=["themegrp"]]
 layout_mode = 2
 theme = ExtResource("2_yp0qm")
 text = "Check Button Example"
 
-[node name="DecoyButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/FlowContainer"]
+[node name="DecoyButton" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_yp0qm")
 text = "Button Example"
 
-[node name="ThemeControls" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer"]
+[node name="DecoyButtonDisabled" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/MarginContainer/MarginContainer/MarginContainer/FlowContainer" groups=["themegrp"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_yp0qm")
+disabled = true
+text = "Disabled Button Example"
+
+[node name="ThemeControls" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer" groups=["themegrp"]]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="CancelThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls"]
+[node name="CancelThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("2_yp0qm")
-text = "Cancel"
+text = "Back"
 
-[node name="ResetThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls"]
+[node name="ResetThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls" groups=["themegrp"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_yp0qm")
 text = "Reset"
 
-[node name="SaveThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls"]
+[node name="SaveThemeEdit" type="Button" parent="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls" groups=["themegrp"]]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_yp0qm")
@@ -549,6 +921,7 @@ script = ExtResource("4_5lhd1")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ColorRect3" type="ColorRect" parent="ParallaxBackground"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -589,3 +962,22 @@ color = Color(0.533037, 0.533037, 0.533037, 0.615686)
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Binds/ResetBindsButton" to="." method="_on_reset_binds_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits/GoBack" to="." method="_on_go_back_pressed"]
 [connection signal="meta_clicked" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/MarginContainer/TabControl/Credits/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultNoteBgColor/PickerDefaultMateColor" to="." method="_on_picker_default_mate_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/NoteBGOutlineColor/PickerHoweredMateColor" to="." method="_on_picker_outline_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultTextColor/PickerDefaultTextColor" to="." method="_on_picker_default_text_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/LineColor/PickerLineColor" to="." method="_on_picker_line_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultNoteBgColor2/PickerDefaultMateColor" to="." method="_on_picker_textedit_mate_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/NoteBGOutlineColor2/PickerHoweredMateColor" to="." method="_on_picker_textedit_outline_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/DefaultTextColor2/PickerDefaultTextColor" to="." method="_on_picker_textedit_text_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/NoteBodyColorPickersList/PlaceholderTextColor3/PickerDefaultTextColor" to="." method="_on_picker_textedit_placeholder_text_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultMateColor/PickerDefaultMateColor" to="." method="_on_picker_button_mate_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultOutlineColor/PickerDefaultOutlineColor" to="." method="_on_picker_button_outline_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/DefaultTextColor/PickerDefaultTextColor" to="." method="_on_picker_button_text_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredMateColor/PickerHoweredMateColor" to="." method="_on_picker_button_howered_mate_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredOutlineColor/PickerHoweredOutlineColor" to="." method="_on_picker_button_howered_outline_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/HoweredTextColor/PickerDefaultTextColor" to="." method="_on_picker_button_howered_text_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseMateColor/PickerInUseMateColor" to="." method="_on_picker_pressed_button_mate_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseOutlineColor/PickerInUseOutlineColor" to="." method="_on_picker_pressed_button_outline_color_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemePreview/VBoxContainer/HBoxContainer/ButtonColorPickersList2/InUseTextColor/PickerInactiveTextColor" to="." method="_on_picker_pressed_button_text_color_color_changed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls/CancelThemeEdit" to="." method="_on_cancel_theme_edit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer2/StyleTabContainer/StyleExampleContainer/VBoxContainer/ThemeControls/ResetThemeEdit" to="." method="_on_reset_theme_edit_pressed"]

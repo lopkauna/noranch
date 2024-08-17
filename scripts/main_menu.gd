@@ -4,6 +4,7 @@ const keymap_path = "user://keymaps.data"
 const interface_preference_path = "user://interface.data"
 const last_unsaved_session_path = "user://lastunsavedsession.data"
 const last_sessions_array_path = "user://lastsessionsarray.data"
+const current_user_theme_path = "user://curtheme.nrchthem"
 var lastsessionsarray : Array
 var keymaps : Dictionary
 var interface_preference : Dictionary
@@ -13,13 +14,19 @@ var interface_preference : Dictionary
 @onready var note_trees_buttons = $"CanvasLayer/Control/Rescent note trees/Note Trees Buttons"
 @onready var rescent_note_trees = $"CanvasLayer/Control/Rescent note trees"
 @onready var message = $CanvasLayer/Control/Message
+@onready var go_nots = $"CanvasLayer/Control/VBoxContainer/Go Nots"
 
 var desired_alpha = 0
 var alpha_timer = 0
 var flpth : String = ""
 
+var curcolordic := {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#for chlds in group
+	#for chlds in get_tree().get_nodes_in_group("themegrp"):
+	#	apply_thm_override(chlds)
+	#go_nots.set_theme(Gset.currenttheme)
 	pack_last_saved_sessions()
 	check_last_unsaved_session()
 	if Gset.temp_dic.size()>0:
@@ -40,6 +47,50 @@ func _ready():
 				if argument.is_absolute_path() and (not "user://".is_subsequence_of(argument) and not "res://".is_subsequence_of(argument)):
 					#flpth = str(argument)
 					flpth = str(argument)
+
+
+func apply_thm_override(node):
+	if FileAccess.file_exists(current_user_theme_path):
+		var file = FileAccess.open(current_user_theme_path,FileAccess.READ)
+		var tempthmdic = file.get_var(true) as Dictionary
+		#if not tempthmdic.is_empty():
+		curcolordic = tempthmdic
+	else:
+		curcolordic = Gset.colorblackdic
+	if node is Button or CheckButton:
+		node.add_theme_color_override("font_color",curcolordic["buttontxtcol"])
+		node.add_theme_color_override("font_hover_color",curcolordic["buttonhowtxtcol"])
+		node.add_theme_color_override("font_hover_pressed_color",curcolordic["buttonprstxtcol"])
+		node.add_theme_color_override("font_pressed_color",curcolordic["buttonprstxtcol"])
+		node.add_theme_color_override("font_disabled_color",Color(0.875,0.875,0.875,0.5))
+		var nrmstlb = node.get_theme_stylebox("normal").duplicate()
+		nrmstlb.set("bg_color", curcolordic["buttonbgcol"])
+		nrmstlb.set("border_color", curcolordic["buttonoutlncol"])
+		node.add_theme_stylebox_override("normal", nrmstlb)
+		var howstlb = node.get_theme_stylebox("hover").duplicate()
+		howstlb.set("bg_color", curcolordic["buttonhowbgcol"])
+		howstlb.set("border_color", curcolordic["buttonhowoutlncol"])
+		node.add_theme_stylebox_override("hover", howstlb)
+		var prsstlb = node.get_theme_stylebox("pressed").duplicate()
+		prsstlb.set("bg_color", curcolordic["buttonprsbgcol"])
+		prsstlb.set("border_color", curcolordic["buttonprsoutlncol"])
+		node.add_theme_stylebox_override("pressed", prsstlb)
+	elif node is Label:
+		node.add_theme_color_override("font_color",curcolordic["deftextcol"])
+	elif node is Panel:
+		var panstlb = node.get_theme_stylebox("panel").duplicate()
+		panstlb.set("bg_color", curcolordic["notebgcol"])
+		panstlb.set("border_color", curcolordic["noteoutlinecol"])
+		node.add_theme_stylebox_override("panel", panstlb)
+	elif node is TextEdit:
+		node.add_theme_color_override("font_color",curcolordic["texteditdeftextcol"])
+		node.add_theme_color_override("font_placeholder_color",curcolordic["texteditplhldrtextcol"])
+		var tedstlb = node.get_theme_stylebox("normal").duplicate()
+		tedstlb.set("bg_color", curcolordic["texteditbgcol"])
+		tedstlb.set("border_color", curcolordic["texteditoutlinecol"])
+		node.add_theme_stylebox_override("normal", tedstlb)
+	elif node is Line2D:
+		node.default_color = curcolordic["lineconcol"]
 
 
 func pack_last_saved_sessions():

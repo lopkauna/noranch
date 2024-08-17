@@ -2,7 +2,8 @@ extends MarginContainer
 
 @onready var h_flow_container = $HFlowContainer
 @onready var tags_click = $TagsClick
-@onready var panel = $"../Panel"
+@onready var panel: Panel = $"../../Panel"
+@onready var text = $"../../../HBoxContainer/TabContainer/ScrollContainer/NoteContent/Text"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,6 +35,8 @@ func _process(delta):
 	else:
 		tags_click.visible = true
 		panel.visible = true
+		panel.position = Vector2(18,(-text.get_global_rect().size.y)*int(1-text.modulate.a)-2*int(text.modulate.a))
+		self.position = Vector2(18,(-text.get_global_rect().size.y)*int(1-text.modulate.a)-2*int(text.modulate.a))
 		add_theme_constant_override("margin_top",4)
 		add_theme_constant_override("margin_bottom",4)
 		add_theme_constant_override("margin_left",4)
