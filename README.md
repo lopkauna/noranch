@@ -1,4 +1,4 @@
-Hi this is little helpy program i use my self. Writen on Godot v 4.2.
+Hi this is little helpy program i use my self. Writen on Godot v 4.3.
 
 This editor can help you organize your work or mind flow.
 
