@@ -7,6 +7,7 @@ Useful functions (good to know):
  - You can add tags to your notes with right mouse click.
  - You can select and move multiple notes.
  - Use shortcuts for fast and effective workflow.
+
 (such as shift+enter-create new child note,alt+enter-create sibling note,shift+del-delete current note)
  - Noranch support Drag and Drop images in programm window. This will create new note.
  - System crashes and power outage doesnt kill all your progress.
