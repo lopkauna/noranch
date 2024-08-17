@@ -14,7 +14,7 @@ Useful functions (good to know):
  - Rescent saved note trees would show up in main menu left up corner.
 
 Planning to add in future builds:
- - Converting note tree in JSON out file (DONE)
+ - Converting note tree in TXT out file (DONE)
  - Mega note tree shots (Making one large image from note tree)
  - Make one note paste standart (so you can just drag and drop notes to your desktop)
  - Make sticky notes that stay on your desktop background
